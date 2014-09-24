@@ -47,6 +47,21 @@ describe('react-reflux:app', function () {
         'README.md'
       ]);
     });
+
+    it('writes metadata to package.json', function () {
+      assert.fileContent('package.json', /test/);
+      assert.fileContent('package.json', /A test project/);
+      assert.fileContent('package.json', /Test Testington/);
+      assert.fileContent('package.json', /1.0.1/);
+      assert.fileContent('package.json', /MIT/);
+    });
+
+    it('writes metadata to bower.json', function () {
+      assert.fileContent('bower.json', /test/);
+      assert.fileContent('bower.json', /Test Testington/);
+      assert.fileContent('bower.json', /1.0.1/);
+      assert.fileContent('bower.json', /MIT/);
+    });
   });
 
   describe('when using modernizr', function () {
