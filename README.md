@@ -1,4 +1,4 @@
-# Reactjs Reflux generator [![Build Status](https://secure.travis-ci.org/tfaga/generator-react-reflux.png?branch=master)](https://travis-ci.org/tfaga/generator-react-reflux)
+# Reactjs Reflux generator [![Build Status](https://travis-ci.org/TFaga/generator-react-reflux.svg?branch=master)](https://travis-ci.org/TFaga/generator-react-reflux)
 
 > A Yeoman Generator for facebook's React framework and flux architecture using reflux.
 
