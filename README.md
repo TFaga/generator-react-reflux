@@ -12,7 +12,6 @@
 * compass
 * reactjs
 * reflux
-* livereload
 
 ## Usage
 
