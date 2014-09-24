@@ -1,0 +1,7 @@
+language: node_js
+node_js:
+  - '0.10'
+before_install:
+  - currentfolder=${PWD##*/}
+  - if [ "$currentfolder" != 'generator-react-reflux' ]; then cd .. && eval "mv $currentfolder generator-react-reflux" && cd generator-react-reflux; fi
+
