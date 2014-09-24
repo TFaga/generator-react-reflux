@@ -1,7 +1,7 @@
 {
   "name": "generator-react-reflux",
   "version": "1.0.0",
-  "description": "Yeoman generator",
+  "description": "A Yeoman Generator for facebook's React framework and flux architecture using reflux.",
   "license": "MIT",
   "main": "app/index.js",
   "repository": "tfaga/generator-react-reflux",
@@ -20,7 +20,11 @@
     "app"
   ],
   "keywords": [
-    "yeoman-generator"
+    "yeoman-generator",
+    "scaffold"
+    "framework",
+    "react-js",
+    "flux"
   ],
   "dependencies": {
     "yeoman-generator": "^0.17.0",

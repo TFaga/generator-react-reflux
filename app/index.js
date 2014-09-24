@@ -14,7 +14,7 @@ var ReactRefluxGenerator = yeoman.generators.Base.extend({
 
     // Have Yeoman greet the user.
     this.log(yosay(
-      'Welcome to the excellent ReactReflux generator!'
+      'Welcome to the excellent React Reflux generator!'
     ));
 
     var prompts = [{

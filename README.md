@@ -1,11 +1,59 @@
-# generator-react-reflux [![Build Status](https://secure.travis-ci.org/tfaga/generator-react-reflux.png?branch=master)](https://travis-ci.org/tfaga/generator-react-reflux)
+# Reactjs Reflux generator [![Build Status](https://secure.travis-ci.org/tfaga/generator-react-reflux.png?branch=master)](https://travis-ci.org/tfaga/generator-react-reflux)
 
-> [Yeoman](http://yeoman.io) generator
+> A Yeoman Generator for facebook's React framework and flux architecture using reflux.
 
 
-## Getting Started
+## What's inside?
 
-### What is Yeoman?
+* gulp
+* bower
+* browserify
+* reactify
+* compass
+* reactjs
+* reflux
+* livereload
+
+## Usage
+
+Install `generator-react-reflux`:
+```
+npm install -g generator-react-reflux
+```
+
+Make a new directory, and `cd` into it:
+```
+mkdir my-new-project && cd $_
+```
+
+Run `yo react-reflux`, optionally passing an app name:
+```
+yo react-reflux [app-name]
+```
+
+If selected install `compass`
+```
+gem install compass
+```
+
+Run `gulp` for building and `gulp serve` for preview
+
+## Generators
+
+Available generators:
+
+* [react-reflux](#app) (aka [react-reflux:app](#app))
+
+**Note: Generators are to be run from the root directory of your app.**
+
+### App
+
+Sets up a new ReactJS app using the flux architecture implemented by reflux, generating all the boilerplate you need to get started.
+
+Example:
+```bash
+yo react-reflux
+```
 
 Trick question. It's not a thing. It's this guy:
 
@@ -19,28 +67,23 @@ Not every new computer comes with a Yeoman pre-installed. He lives in the [npm](
 npm install -g yo
 ```
 
-### Yeoman Generators
+## Testing
 
-Yeoman travels light. He didn't pack any generators when he moved in. You can think of a generator like a plug-in. You get to choose what type of application you wish to create, such as a Backbone application or even a Chrome extension.
+Running `npm test` will run the unit tests with mocha.
 
-To install generator-react-reflux from npm, run:
+## Changelog
 
-```bash
-npm install -g generator-react-reflux
-```
+Recent changes can be viewed on Github on the [Releases Page](https://github.com/tfaga/generator-react-reflux/releases)
 
-Finally, initiate the generator:
+## Contribute
 
-```bash
-yo react-reflux
-```
+See the [contributing docs](https://github.com/yeoman/yeoman/blob/master/contributing.md)
 
-### Getting To Know Yeoman
+When submitting an issue, please follow the [guidelines](https://github.com/yeoman/yeoman/blob/master/contributing.md#issue-submission). Especially important is to make sure Yeoman is up-to-date, and providing the command or commands that cause the issue.
 
-Yeoman has a heart of gold. He's a person with feelings and opinions, but he's very easy to work with. If you think he's too opinionated, he can be easily convinced.
+When submitting a bugfix, write a test that exposes the bug and fails before applying your fix. Submit the test alongside the fix.
 
-If you'd like to get to know Yeoman better and meet some of his friends, [Grunt](http://gruntjs.com) and [Bower](http://bower.io), check out the complete [Getting Started Guide](https://github.com/yeoman/yeoman/wiki/Getting-Started).
-
+When submitting a new feature, add tests that cover the feature.
 
 ## License
 
