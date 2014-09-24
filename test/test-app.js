@@ -12,17 +12,40 @@ describe('react-reflux:app', function () {
       .inDir(path.join(os.tmpdir(), './temp-test'))
       .withOptions({ 'skip-install': true })
       .withPrompt({
-        someOption: true
+        projectName: 'test',
+        desc: 'A test project',
+        author: 'Test Testington',
+        version: '1.0.1',
+        license: 'MIT',
+        features: [
+          'includeModernizr',
+          'includeSass'
+        ]
       })
       .on('end', done);
   });
 
   it('creates files', function () {
-    assert.file([
+    assert.file([ 
+      'app/images',
+      'app/scripts/actions',
+      'app/scripts/stores',
+
+      'app/favicon.ico',
+      'app/robots.txt',
+      'app/scripts/app.js',
+      'app/scripts/router.jsx',
+      'app/scripts/components/layout.jsx',
+      'app/scripts/components/home.jsx',
+      'app/styles/main.scss',
+      'app/index.html',
+
+      'gulpfile.js',
       'bower.json',
       'package.json',
       '.editorconfig',
-      '.jshintrc'
+      '.jshintrc',
+      'README.md'
     ]);
   });
 });

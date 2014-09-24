@@ -63,7 +63,7 @@ var ReactRefluxGenerator = yeoman.generators.Base.extend({
     this.prompt(prompts, function (props) {
       var features = props.features;
 
-      function hasFeature(feat) { return features.indexOf(feat) !== -1; }
+      function hasFeature(feat) { return props.features.indexOf(feat) !== -1; }
 
       this.projectName = props.projectName;
       this.desc = props.desc;
