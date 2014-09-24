@@ -12,6 +12,7 @@
 * compass
 * reactjs
 * reflux
+* react-router
 
 ## Usage
 

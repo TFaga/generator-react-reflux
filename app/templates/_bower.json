@@ -1,6 +1,21 @@
 {
-  "name": "package",
-  "version": "0.0.0",
-  "dependencies": {}
+  "name": "<%= projectName %>",
+  "version": "<%= version %>",
+  "authors": [
+    "<%= author %>"
+  ],
+  "moduleType": [
+    "node"
+  ],
+  "license": "<%= license %>",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "app/vendor",
+    "test",
+    "tests"
+  ],
+  "dependencies": {<% if (includeModernizr) { %>
+    "modernizr": "~2.8.3"<% } %>
+  }
 }
-
