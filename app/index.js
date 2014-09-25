@@ -23,6 +23,11 @@ var ReactRefluxGenerator = yeoman.generators.Base.extend({
       desc: 'Skip the bower and node installations',
       defaults: false
     });
+
+    this.argument('app_name', { 
+      type: String,
+      required: false
+    });
   },
 
   prompting: function () {
@@ -38,7 +43,7 @@ var ReactRefluxGenerator = yeoman.generators.Base.extend({
     var prompts = [{
       name: 'projectName',
       message: 'What is the project\'s name?',
-      default: path.basename(path.resolve('.'))
+      default: this.app_name || path.basename(path.resolve('.'))
     },
     {
       name: 'desc',
