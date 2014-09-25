@@ -100,7 +100,7 @@ var ReactRefluxGenerator = yeoman.generators.Base.extend({
       this.template('_gulpfile.js', 'gulpfile.js');
       this.template('_package.json', 'package.json');
       this.template('_bower.json', 'bower.json');
-      this.template('README.md', 'README.md');
+      this.template('_README.md', 'README.md');
 
       this.src.copy('app/styles/main.scss', 'app/styles/main.' + (this.includeSass ? 'scss' : 'css'));
     },
