@@ -63,7 +63,7 @@ var ReactRefluxGenerator = yeoman.generators.Base.extend({
     this.prompt(prompts, function (props) {
       var features = props.features;
 
-      function hasFeature(feat) { return props.features.indexOf(feat) !== -1; }
+      function hasFeature(feat) { return features.indexOf(feat) !== -1; }
 
       this.projectName = props.projectName;
       this.desc = props.desc;
@@ -90,6 +90,7 @@ var ReactRefluxGenerator = yeoman.generators.Base.extend({
 
       this.src.copy('app/favicon.ico', 'app/favicon.ico');
       this.src.copy('app/robots.txt', 'app/robots.txt');
+      this.src.copy('app/404.html', 'app/404.html');
       this.src.copy('app/scripts/app.js', 'app/scripts/app.js');
       this.src.copy('app/scripts/router.jsx', 'app/scripts/router.jsx');
       this.src.copy('app/scripts/components/layout.jsx', 'app/scripts/components/layout.jsx');

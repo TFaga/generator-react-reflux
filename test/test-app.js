@@ -32,6 +32,7 @@ describe('react-reflux:app', function () {
 
         'app/favicon.ico',
         'app/robots.txt',
+        'app/404.html',
         'app/scripts/app.js',
         'app/scripts/router.jsx',
         'app/scripts/components/layout.jsx',
