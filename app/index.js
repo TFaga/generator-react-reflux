@@ -8,6 +8,21 @@ var chalk = require('chalk');
 var ReactRefluxGenerator = yeoman.generators.Base.extend({
   initializing: function () {
     this.pkg = require('../package.json');
+
+    this.option('modernizr', {
+      desc: 'Use Modernizr',
+      defaults: false
+    });
+
+    this.option('compass', {
+      desc: 'Use Sass with Compass',
+      defaults: false
+    });
+
+    this.option('skip-install', {
+      desc: 'Skip the bower and node installations',
+      defaults: false
+    });
   },
 
   prompting: function () {
@@ -52,11 +67,11 @@ var ReactRefluxGenerator = yeoman.generators.Base.extend({
       {
           name: 'Modernizr',
           value: 'includeModernizr',
-          checked: true
+          checked: this.options.modernizr || false
       },{
           name: 'Sass with Compass',
           value: 'includeSass',
-          checked: true
+          checked: this.options.compass || false
       }]
     }];
 
@@ -114,7 +129,7 @@ var ReactRefluxGenerator = yeoman.generators.Base.extend({
   },
 
   end: function () {
-    this.log(chalk.magenta('\nMake sure to run \'npm install\' and \'bower install\' before starting to install dependencies.'));
+    this.installDependencies({ skipInstall: this.options['skip-install'] });
   }
 });
 
