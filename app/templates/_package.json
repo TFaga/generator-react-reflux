@@ -7,8 +7,8 @@
   "dependencies": {
     "jquery": "^2.1.1",
     "react": "~0.11",
-    "react-router": "^0.7.0",
-    "reflux": "^0.1.7"
+    "react-router": "^0.9.3",
+    "reflux": "^0.1.13"
   },
   "devDependencies": {
     "gulp": "~3.8.8",
