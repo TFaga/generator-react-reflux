@@ -17,18 +17,18 @@
     "gulp-compass": "^1.3.1",<% } %>
     "gulp-filter": "^1.0.2",
     "gulp-imagemin": "^1.0.1",
-    "gulp-load-plugins": "~0.6.0",
-    "gulp-minify-css": "^0.3.8",
+    "gulp-load-plugins": "~0.7.0",
+    "gulp-minify-css": "^0.3.10",
     "gulp-plumber": "^0.6.5",
     "gulp-rev-all": "^0.6.6",
     "gulp-rev-replace": "^0.3.1",
-    "gulp-rimraf": "^0.1.0",
+    "gulp-rimraf": "^0.1.1",
     "gulp-size": "^1.1.0",
     "gulp-uglify": "^1.0.1",
     "gulp-useref": "^1.0.2",
     "gulp-webserver": "^0.8.1",
     "reactify": "~0.14.0",
-    "run-sequence": "^0.3.6"
+    "run-sequence": "^1.0.1"
   },
   "engines": {
     "node": ">=0.10.0"
