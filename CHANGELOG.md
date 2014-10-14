@@ -1,10 +1,12 @@
 <a name="1.1.0"></a>
-## 1.1.0 - Wed, 15 Oct 2014
+## 1.1.0 - Next release
 
 #### Features
 
 -	Updated gulp and its plugins versions ([83e536d](TFaga/generator-react-reflux/commit/83e536dcee32ef88abab24d637fc6090a8d0330c))
 - Swapped gulp rimraf (deprecated) for npm del ([9a1a747](TFaga/generator-react-reflux/commit/9a1a7475dea0334a2dd9d7a62121bb3bfb0dba27))
+- Added html minification to the gulp build task ([dfe75e8](TFaga/generator-react-reflux/commit/dfe75e8d09a583d64638704e3b0e4b6a7833cec8))
+- Added user entered description to index.html ([ed83d05](TFaga/generator-react-reflux/commit/ed83d05c0d9dd003d9370e03bec5f5620c9154b8))
 
 #### Bug Fixes
 
