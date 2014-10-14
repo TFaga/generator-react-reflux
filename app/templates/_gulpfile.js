@@ -1,18 +1,17 @@
 var gulp = require('gulp');
 
 var $ = require('gulp-load-plugins')();
+var del = require('del');
 var runSequence = require('run-sequence');
 
 var env = 'dev';
 
 gulp.task('clean:dev', function() {
-  return gulp.src('.tmp', { read: false })
-    .pipe($.rimraf({ force: true }));
+  return del(['.tmp']);
 });
 
 gulp.task('clean:dist', function() {
-  return gulp.src('dist', { read: false })
-    .pipe($.rimraf({ force: true }));
+  return del(['dist']);
 });
 
 gulp.task('scripts', function() {
