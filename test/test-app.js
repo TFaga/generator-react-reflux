@@ -63,6 +63,10 @@ describe('react-reflux:app', function () {
       assert.fileContent('bower.json', /1.0.1/);
       assert.fileContent('bower.json', /MIT/);
     });
+
+    it('uses css syntax', function() {
+      assert.fileContent('app/styles/main.css', /.hero-unit h1/);
+    });
   });
 
   describe('when using modernizr', function () {
