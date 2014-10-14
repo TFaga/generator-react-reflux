@@ -73,13 +73,6 @@ gulp.task('bundle', function () {
     .pipe($.size());
 });
 
-gulp.task('html', function() {
-  return gulp.src('app/*.html')
-    .pipe($.useref())
-    .pipe(gulp.dest('dist'))
-    .pipe($.size());
-});
-
 gulp.task('webserver', function() {
   return gulp.src(['.tmp', 'app'])
     .pipe($.webserver({
