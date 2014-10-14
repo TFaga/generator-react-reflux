@@ -52,6 +52,7 @@ gulp.task('bundle', function () {
   var assets = $.useref.assets({searchPath: '{.tmp,app}'});
   var jsFilter = $.filter(['**/*.js']);
   var cssFilter = $.filter(['**/*.css']);
+  var htmlFilter = $.filter(['*.html']);
 
   return gulp.src('app/*.html')
     .pipe(assets)
@@ -66,6 +67,9 @@ gulp.task('bundle', function () {
     }))
     .pipe($.minifyCss())
     .pipe(cssFilter.restore())
+    .pipe(htmlFilter)
+    .pipe($.htmlmin({collapseWhitespace: true}))
+    .pipe(htmlFilter.restore())
     .pipe($.revAll({ ignore: [/^\/favicon.ico$/g, '.html'] }))
     .pipe($.revReplace())
     .pipe(gulp.dest('dist'))
