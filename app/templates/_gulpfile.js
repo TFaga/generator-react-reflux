@@ -15,7 +15,7 @@ gulp.task('clean:dist', function() {
 });
 
 gulp.task('scripts', function() {
-  return gulp.src('app/scripts/app.js')
+  return gulp.src('app/scripts/app.js', { read: false })
     .pipe($.plumber())
     .pipe($.browserify({
       transform: ['reactify'],
