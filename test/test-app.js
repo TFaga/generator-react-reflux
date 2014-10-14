@@ -64,7 +64,11 @@ describe('react-reflux:app', function () {
       assert.fileContent('bower.json', /MIT/);
     });
 
-    it('uses css syntax', function() {
+    it('writes metadata to index.html', function () {
+      assert.fileContent('app/index.html', /A test project/);
+    });
+
+    it('uses css syntax', function () {
       assert.fileContent('app/styles/main.css', /.hero-unit h1/);
     });
   });
