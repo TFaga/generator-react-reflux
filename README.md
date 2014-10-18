@@ -60,7 +60,7 @@ Options:
 
 * `--modernizr`
 	
-	Includes Modernizr 
+	Include Modernizr.
 
 * `--coffee-script`
 	
