@@ -14,6 +14,11 @@ var ReactRefluxGenerator = yeoman.generators.Base.extend({
       defaults: false
     });
 
+    this.option('coffee-script', {
+      desc: 'Use CoffeeScript',
+      defaults: false
+    });
+
     this.option('compass', {
       desc: 'Use Sass with Compass',
       defaults: false
@@ -73,7 +78,11 @@ var ReactRefluxGenerator = yeoman.generators.Base.extend({
           name: 'Modernizr',
           value: 'includeModernizr',
           checked: this.options.modernizr || false
-      },{
+      }, {
+          name: 'CoffeeScript',
+          value: 'includeCoffee',
+          checked: this.options.coffee || false
+      }, {
           name: 'Sass with Compass',
           value: 'includeSass',
           checked: this.options.compass || false
@@ -92,6 +101,7 @@ var ReactRefluxGenerator = yeoman.generators.Base.extend({
       this.license = props.license;
 
       this.includeModernizr = hasFeature('includeModernizr');
+      this.includeCoffee = hasFeature('includeCoffee');
       this.includeSass = hasFeature('includeSass');
 
       done();
@@ -111,16 +121,27 @@ var ReactRefluxGenerator = yeoman.generators.Base.extend({
       this.src.copy('app/favicon.ico', 'app/favicon.ico');
       this.src.copy('app/robots.txt', 'app/robots.txt');
       this.src.copy('app/404.html', 'app/404.html');
-      this.src.copy('app/scripts/app.js', 'app/scripts/app.js');
-      this.src.copy('app/scripts/router.jsx', 'app/scripts/router.jsx');
-      this.src.copy('app/scripts/components/layout.jsx', 'app/scripts/components/layout.jsx');
 
       this.template('app/index.html', 'app/index.html');
-      this.template('app/scripts/components/home.jsx', 'app/scripts/components/home.jsx');
-      this.template('_gulpfile.js', 'gulpfile.js');
       this.template('_package.json', 'package.json');
       this.template('_bower.json', 'bower.json');
       this.template('_README.md', 'README.md');
+      
+      if (this.includeCoffee) {
+        this.src.copy('app/scripts/app.coffee', 'app/scripts/app.coffee');
+        this.src.copy('app/scripts/router.cjsx', 'app/scripts/router.cjsx');
+        this.src.copy('app/scripts/components/layout.cjsx', 'app/scripts/components/layout.cjsx');
+
+        this.template('app/scripts/components/home.cjsx', 'app/scripts/components/home.cjsx');
+        this.template('_gulpfile.coffee', 'gulpfile.coffee');
+      } else {
+        this.src.copy('app/scripts/app.js', 'app/scripts/app.js');
+        this.src.copy('app/scripts/router.jsx', 'app/scripts/router.jsx');
+        this.src.copy('app/scripts/components/layout.jsx', 'app/scripts/components/layout.jsx');
+
+        this.template('app/scripts/components/home.jsx', 'app/scripts/components/home.jsx');
+        this.template('_gulpfile.js', 'gulpfile.js');
+      };
 
       this.src.copy('app/styles/main.' + (this.includeSass ? 'scss' : 'css'),
         'app/styles/main.' + (this.includeSass ? 'scss' : 'css'));
