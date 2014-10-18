@@ -9,6 +9,7 @@
 * bower
 * browserify
 * reactify
+* coffeescript
 * compass
 * reactjs
 * reflux
@@ -54,6 +55,25 @@ Example:
 ```bash
 yo react-reflux
 ```
+
+Options:
+
+* `--modernizr`
+	
+	Includes Modernizr 
+
+* `--coffee-script`
+	
+	Generate scripts in CoffeeScript.
+
+* `--compass`
+	
+	Generate stylesheets in Compass.
+
+* `--skip-install`
+
+  Skips the automatic execution of `bower` and `npm` after
+  scaffolding has finished.
 
 ## Testing
 
