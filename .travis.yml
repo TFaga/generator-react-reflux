@@ -1,7 +1,15 @@
 language: node_js
 node_js:
-  - '0.10'
+- '0.10'
 before_install:
-  - currentfolder=${PWD##*/}
-  - if [ "$currentfolder" != 'generator-react-reflux' ]; then cd .. && eval "mv $currentfolder generator-react-reflux" && cd generator-react-reflux; fi
-
+- currentfolder=${PWD##*/}
+- if [ "$currentfolder" != 'generator-react-reflux' ]; then cd .. && eval "mv $currentfolder
+  generator-react-reflux" && cd generator-react-reflux; fi
+deploy:
+  provider: npm
+  email: tilen.faganel@me.com
+  api_key:
+    secure: RRxM92sUiyu8rewRAGTBnvbW0TclR5SckktNAeMb2lirY4PiO4vg52f7hreusxIsSCm+xJKefhgDtBJnwuK3xC/s7aXTP43pe3Yh0gE9q90ZLOexp5c5rW7zoaSn87MrgSUGkG92k+RtuILuJYsxCI11rfX87cOU1IkM1uShmrE=
+  on:
+    tags: true
+    repo: TFaga/generator-react-reflux
