@@ -98,6 +98,63 @@ describe('react-reflux:app', function () {
     it('inserts modernizr to bower', function () {
       assert.fileContent('bower.json', /"modernizr"/);
     });
+
+    it('inserts modernizr to home html component', function () {
+      assert.fileContent('app/scripts/components/home.jsx', /<li>Modernizr<\/li>/);
+    });
+  });
+
+  describe('when using CoffeeScript', function () {
+    before(function (done) {
+      helpers.run(path.join(__dirname, '../app'))
+      .inDir(path.join(os.tmpdir(), './temp-test'))
+      .withOptions({ 'skip-install': true })
+      .withPrompt({
+        projectName: 'test',
+        desc: 'A test project',
+        author: 'Test Testington',
+        version: '1.0.1',
+        license: 'MIT',
+        features: [
+          'includeCoffee'
+        ]
+      })
+      .on('end', done);
+    });
+
+    it('creates coffee and cjsx files', function () {
+      assert.file([ 
+        'app/scripts/app.coffee',
+        'app/scripts/router.cjsx',
+        'app/scripts/components/layout.cjsx',
+        'app/scripts/components/home.cjsx',
+
+        'gulpfile.coffee'
+      ]);
+    });
+
+    it('doesn\'t create js and jsx files', function () {
+      assert.noFile([
+        'app/scripts/app.js',
+        'app/scripts/router.jsx',
+        'app/scripts/components/layout.jsx',
+        'app/scripts/components/home.jsx',
+
+        'gulpfile.js'
+      ]);
+    });
+
+    it('inserts coffeescript requirements to package.json', function () {
+      assert.fileContent([
+        ['package.json', /"coffee-reactify"/],
+        ['package.json', /"coffee-script"/],
+        ['package.json', /"gulp-rename"/]
+      ]);
+    });
+
+    it('doesn\'t insert unneeded requirements to package.json', function () {
+      assert.noFileContent('package.json', /"reactify"/);
+    });
   });
 
   describe('when using compass', function () {
@@ -112,7 +169,6 @@ describe('react-reflux:app', function () {
         version: '1.0.1',
         license: 'MIT',
         features: [
-          'includeModernizr',
           'includeSass'
         ]
       })
@@ -135,12 +191,12 @@ describe('react-reflux:app', function () {
       assert.fileContent('gulpfile.js', /'compass'/);
     });
 
-    it('inserts modernizr to package.json', function () {
+    it('inserts compass to package.json', function () {
       assert.fileContent('package.json', /"gulp-compass"/);
     });
 
-    it('inserts modernizr to home html component', function () {
-      assert.fileContent('app/scripts/components/home.jsx', /<li>Modernizr<\/li>/);
+    it('inserts compass to home html component', function () {
+      assert.fileContent('app/scripts/components/home.jsx', /<li>Sass with Compass<\/li>/);
     });
   });
 });
