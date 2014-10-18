@@ -10,13 +10,13 @@
     "react-router": "^0.9.3",
     "reflux": "^0.1.13"
   },
-  "devDependencies": {<% if (includeCoffee) { %>
+  "devDependencies": {
+    "browserify": "^6.1.0",<% if (includeCoffee) { %>
     "coffee-reactify": "^1.0.3",
     "coffee-script": "^1.8.0",<% } %>
     "del": "^0.1.3",
     "gulp": "~3.8.8",
-    "gulp-autoprefixer": "^1.0.0",
-    "gulp-browserify": "^0.5.0",<% if (includeSass) { %>
+    "gulp-autoprefixer": "^1.0.0",<% if (includeSass) { %>
     "gulp-compass": "^1.3.1",<% } %>
     "gulp-filter": "^1.0.2",
     "gulp-htmlmin": "^0.2.0",
@@ -32,7 +32,8 @@
     "gulp-useref": "^1.0.2",
     "gulp-webserver": "^0.8.1",<% if (!includeCoffee) { %>
     "reactify": "~0.14.0",<% } %>
-    "run-sequence": "^1.0.1"
+    "run-sequence": "^1.0.1",
+    "vinyl-source-stream": "^1.0.0"
   },
   "engines": {
     "node": ">=0.10.0"

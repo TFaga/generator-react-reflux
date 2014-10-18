@@ -2,6 +2,8 @@ gulp        = require 'gulp'
 
 $           = require('gulp-load-plugins')()
 del         = require 'del'
+source      = require 'vinyl-source-stream'
+browserify  = require 'browserify'
 runSequence = require 'run-sequence'
 
 env         = 'dev'
@@ -13,14 +15,13 @@ gulp.task 'clean:dist', ->
   del ['dist']
 
 gulp.task 'scripts', ->
-  gulp.src 'app/scripts/app.coffee', read: false
-    .pipe $.plumber()
-    .pipe $.browserify
-      transform: ['coffee-reactify']
-      extensions: ['.cjsx', '.coffee']
-      debug: env == 'dev',
-      outfile: 'app.js'
-    .pipe $.rename('app.js')
+  bundler = browserify './app/scripts/app.coffee',
+    extensions: ['.cjsx', '.coffee']
+    debug: env == 'dev'
+  .transform 'coffee-reactify' 
+
+  bundler.bundle()
+    .pipe source('app.js')
     .pipe gulp.dest('.tmp/scripts')
 <% if (includeSass) { %>
 gulp.task 'compass', ->

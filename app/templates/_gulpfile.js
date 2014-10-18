@@ -1,7 +1,9 @@
-var gulp = require('gulp');
+var gulp        = require('gulp');
 
-var $ = require('gulp-load-plugins')();
-var del = require('del');
+var $           = require('gulp-load-plugins')();
+var del         = require('del');
+var source      = require('vinyl-source-stream');
+var browserify  = require('browserify');
 var runSequence = require('run-sequence');
 
 var env = 'dev';
@@ -15,14 +17,14 @@ gulp.task('clean:dist', function() {
 });
 
 gulp.task('scripts', function() {
-  return gulp.src('app/scripts/app.js', { read: false })
-    .pipe($.plumber())
-    .pipe($.browserify({
-      transform: ['reactify'],
-      extensions: ['.jsx'],
-      debug: env == 'dev'
-    }))
-    .pipe(gulp.dest('.tmp/scripts'))
+  var bundler = browserify('./app/scripts/app.js', {
+    extensions: ['.jsx'],
+    debug: env == 'dev'
+  }).transform('reactify');
+
+  return bundler.bundle()
+    .pipe(source('app.js'))
+    .pipe(gulp.dest('.tmp/scripts'));
 });
 <% if (includeSass) { %>
 gulp.task('compass', function() {
