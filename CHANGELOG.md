@@ -1,3 +1,11 @@
+<a name="1.1.1"></a>
+## 1.1.1 - Sat, 19 Oct 2014
+
+#### Bug Fixes
+
+- Changed the gulp imagemin version to 1.0.1 as 1.1.0 does not install dependencies correctly and as such failes to build ([c0d933c](https://github.com/TFaga/generator-react-reflux/commit/c0d933c93b36aff4e857e4b2e2410dda9f6e9500))
+- Removed the gulp browserify plugin as it is blacklisted and added the standalone browserify plugin and use it together with vinyl-source-stream to integrate it with gulp streams in the build process ([968c47a](https://github.com/TFaga/generator-react-reflux/commit/968c47accf35335a13ff146adbee1af650e2c1bb))
+
 <a name="1.1.0"></a>
 ## 1.1.0 - Sat, 19 Oct 2014
 
