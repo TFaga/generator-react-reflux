@@ -1,8 +1,9 @@
 <a name="1.1.0"></a>
-## 1.1.0 - Next release
+## 1.1.0 - Sat, 19 Oct 2014
 
 #### Features
 
+- Added option to use CoffeeScript instead of plain JavaScript ([9f50a36](https://github.com/TFaga/generator-react-reflux/commit/9f50a366def0635e11526a7b74115855c8a24386))
 -	Updated gulp and its plugins versions ([16c999e](https://github.com/TFaga/generator-react-reflux/commit/16c999e8c71134401a78d4d46435517b2271d6ac))
 - Swapped gulp rimraf (deprecated) for npm del ([9a1a747](https://github.com/TFaga/generator-react-reflux/commit/9a1a7475dea0334a2dd9d7a62121bb3bfb0dba27))
 - Added html minification to the gulp build task ([dfe75e8](https://github.com/TFaga/generator-react-reflux/commit/dfe75e8d09a583d64638704e3b0e4b6a7833cec8))
