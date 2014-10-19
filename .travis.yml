@@ -12,4 +12,5 @@ deploy:
     secure: RRxM92sUiyu8rewRAGTBnvbW0TclR5SckktNAeMb2lirY4PiO4vg52f7hreusxIsSCm+xJKefhgDtBJnwuK3xC/s7aXTP43pe3Yh0gE9q90ZLOexp5c5rW7zoaSn87MrgSUGkG92k+RtuILuJYsxCI11rfX87cOU1IkM1uShmrE=
   on:
     tags: true
+    all_branches: true
     repo: TFaga/generator-react-reflux
