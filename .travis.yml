@@ -1,9 +1,6 @@
 language: node_js
 node_js:
 - '0.10'
-env:
-  global:
-    secure: cob2wMHOWsalWBYkSltREauuKcSqGErB+xBnDh/HKHuhAo8qvFMg5OF1UxqCwElzQRR8FdIk2TDgk61p4klZqTBSTZGADwqR60u1RBLEc18lmC7bzCVeD3KDjN/yFZoIbn9V5QFONSwHNiCwbp3WurYmRy0YHb9BlRrBoOAM9Fg=
 before_install:
 - currentfolder=${PWD##*/}
 - if [ "$currentfolder" != 'generator-react-reflux' ]; then cd .. && eval "mv $currentfolder
@@ -17,6 +14,3 @@ deploy:
     tags: true
     all_branches: true
     repo: TFaga/generator-react-reflux
-after_success:
-  - ABC="test"
-  - echo $ABC
