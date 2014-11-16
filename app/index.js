@@ -24,6 +24,11 @@ var ReactRefluxGenerator = yeoman.generators.Base.extend({
       defaults: false
     });
 
+    this.option('jest', {
+      desc: 'Use jest tests',
+      defaults: false
+    });
+
     this.option('skip-install', {
       desc: 'Skip the bower and node installations',
       defaults: false
@@ -86,6 +91,10 @@ var ReactRefluxGenerator = yeoman.generators.Base.extend({
           name: 'Sass with Compass',
           value: 'includeSass',
           checked: this.options.compass || false
+      }, {
+          name: 'Jest tests',
+          value: 'includeJest',
+          checked: this.options.jest || false
       }]
     }];
 
@@ -103,6 +112,7 @@ var ReactRefluxGenerator = yeoman.generators.Base.extend({
       this.includeModernizr = hasFeature('includeModernizr');
       this.includeCoffee = hasFeature('includeCoffee');
       this.includeSass = hasFeature('includeSass');
+      this.includeJest = hasFeature('includeJest');
 
       done();
     }.bind(this));
@@ -117,6 +127,10 @@ var ReactRefluxGenerator = yeoman.generators.Base.extend({
       this.dest.mkdir('app/scripts/components');
       this.dest.mkdir('app/scripts/stores');
       this.dest.mkdir('app/styles');
+
+      if (this.includeJest) {
+        this.dest.mkdir('app/__tests__');
+      }
 
       this.src.copy('app/favicon.ico', 'app/favicon.ico');
       this.src.copy('app/robots.txt', 'app/robots.txt');
@@ -134,6 +148,11 @@ var ReactRefluxGenerator = yeoman.generators.Base.extend({
 
         this.template('app/scripts/components/home.cjsx', 'app/scripts/components/home.cjsx');
         this.template('_gulpfile.coffee', 'gulpfile.coffee');
+
+        if (this.includeJest) {
+          this.src.copy('__tests__/home-test.cjsx', '__tests__/home-test.cjsx');
+          this.src.copy('preprocessor.js.coffee', 'preprocessor.js');
+        }
       } else {
         this.src.copy('app/scripts/app.js', 'app/scripts/app.js');
         this.src.copy('app/scripts/router.jsx', 'app/scripts/router.jsx');
@@ -141,6 +160,11 @@ var ReactRefluxGenerator = yeoman.generators.Base.extend({
 
         this.template('app/scripts/components/home.jsx', 'app/scripts/components/home.jsx');
         this.template('_gulpfile.js', 'gulpfile.js');
+
+        if (this.includeJest) {
+          this.src.copy('__tests__/home-test.jsx', '__tests__/home-test.jsx');
+          this.src.copy('preprocessor.js', 'preprocessor.js');
+        }
       };
 
       this.src.copy('app/styles/main.' + (this.includeSass ? 'scss' : 'css'),

@@ -11,7 +11,8 @@
     "reflux": "^0.1.15"
   },
   "devDependencies": {
-    "browserify": "^6.3.2",<% if (includeCoffee) { %>
+    "browserify": "^6.3.2",<% if (includeCoffee) { %><% if (includeJest) { %>
+    "coffee-react": "^2.0.0",<% } %>
     "coffee-reactify": "^2.0.0",
     "coffee-script": "^1.8.0",<% } %>
     "del": "^0.1.3",
@@ -30,12 +31,30 @@
     "gulp-size": "^1.1.0",
     "gulp-uglify": "^1.0.1",
     "gulp-useref": "^1.0.2",
-    "gulp-webserver": "^0.8.1",<% if (!includeCoffee) { %>
-    "reactify": "~0.16.0",<% } %>
+    "gulp-webserver": "^0.8.1",<% if (includeJest) { %>
+    "jest-cli": "^0.1.18",<% } %><% if (!includeCoffee) { %>
+    "reactify": "~0.16.0",<% if (includeJest) { %>
+    "react-tools": "^0.12.0",<% } } %>
     "run-sequence": "^1.0.1",
     "vinyl-source-stream": "^1.0.0"
   },
   "engines": {
     "node": ">=0.10.0"
-  }
+  },
+  "scripts": {
+    "start": "./node_modules/gulp/bin/gulp.js serve",<% if (includeJest) { %>
+    "test": "./node_modules/jest-cli/bin/jest.js",<% } %>
+    "build": "./node_modules/gulp/bin/gulp.js build"
+  }<% if (includeJest) { %>,
+  "jest": {
+    "scriptPreprocessor": "./preprocessor.js",
+    "unmockedModulePathPatterns": [
+      "./node_modules/react"
+    ],
+    "testFileExtensions": [
+      "jsx",
+      "js",
+      "cjsx"
+    ]
+  }<% } %>
 }

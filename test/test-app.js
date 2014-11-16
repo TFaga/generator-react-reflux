@@ -199,4 +199,107 @@ describe('react-reflux:app', function () {
       assert.fileContent('app/scripts/components/home.jsx', /<li>Sass with Compass<\/li>/);
     });
   });
+
+  describe('when using jest with javascript', function () {
+    before(function (done) {
+      helpers.run(path.join(__dirname, '../app'))
+      .inDir(path.join(os.tmpdir(), './temp-test'))
+      .withOptions({ 'skip-install': true })
+      .withPrompt({
+        projectName: 'test',
+        desc: 'A test project',
+        author: 'Test Testington',
+        version: '1.0.1',
+        license: 'MIT',
+        features: [
+          'includeJest'
+        ]
+      })
+      .on('end', done);
+    });
+
+    it('creates test file', function () {
+      assert.file([
+        '__tests__/home-test.jsx'
+      ]);
+    });
+
+    it('creates test preprocessor', function () {
+      assert.file([
+        'preprocessor.js'
+      ]);
+    });
+
+    it('contains javascript preprocessor', function () {
+      assert.fileContent('preprocessor.js', /ReactTools.transform\(src\)/)
+    });
+
+    it('inserts jest to package.json', function () {
+      assert.fileContent('package.json', /"jest-cli"/);
+    });
+
+    it('inserts react-tools to package.json', function () {
+      assert.fileContent('package.json', /"react-tools"/);
+    });
+
+    it('inserts test script to package.json', function () {
+      assert.fileContent('package.json', /"test": ".\/node_modules\/jest-cli\/bin\/jest.js"/);
+    });
+
+    it('inserts jest config to package.json', function () {
+      assert.fileContent('package.json', /"jest": {/);
+    });
+  });
+
+  describe('when using jest with coffeescript', function () {
+    before(function (done) {
+      helpers.run(path.join(__dirname, '../app'))
+      .inDir(path.join(os.tmpdir(), './temp-test'))
+      .withOptions({ 'skip-install': true })
+      .withPrompt({
+        projectName: 'test',
+        desc: 'A test project',
+        author: 'Test Testington',
+        version: '1.0.1',
+        license: 'MIT',
+        features: [
+          'includeCoffee',
+          'includeJest'
+        ]
+      })
+      .on('end', done);
+    });
+
+    it('creates test file', function () {
+      assert.file([
+        '__tests__/home-test.cjsx'
+      ]);
+    });
+
+    it('creates test preprocessor', function () {
+      assert.file([
+        'preprocessor.js'
+      ]);
+    });
+
+    it('contains javascript preprocessor', function () {
+      assert.fileContent('preprocessor.js', /CoffeeReact.compile\(src, {/)
+    });
+
+    it('inserts jest to package.json', function () {
+      assert.fileContent('package.json', /"jest-cli"/);
+    });
+
+    it('inserts coffee-react to package.json', function () {
+      assert.fileContent('package.json', /"coffee-react"/);
+    });
+
+    it('inserts test script to package.json', function () {
+      assert.fileContent('package.json', /"test": ".\/node_modules\/jest-cli\/bin\/jest.js"/);
+    });
+
+    it('inserts jest config to package.json', function () {
+      assert.fileContent('package.json', /"jest": {/);
+    });
+  });
 });
