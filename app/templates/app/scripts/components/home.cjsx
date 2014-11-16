@@ -12,7 +12,8 @@ Home = React.createClass
             <li>ReactJS Reflux Boilerplate</li><% if (includeModernizr) { %>
             <li>Modernizr</li><% } %>
             <li>CoffeeScript</li><% if (includeSass) { %>
-            <li>Sass with Compass</li><% } %>
+            <li>Sass with Compass</li><% } %><% if (includeJest) { %>
+            <li>Jest</li><% } %>
         </ul>
       </div>
     )
