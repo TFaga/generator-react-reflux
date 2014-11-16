@@ -11,6 +11,7 @@
 * reactify
 * coffeescript
 * compass
+* jest
 * reactjs
 * reflux
 * react-router
@@ -69,6 +70,10 @@ Options:
 * `--compass`
 	
 	Generate stylesheets in Compass.
+
+* `--jest`
+	
+	Generate testing boilerplate with jest.
 
 * `--skip-install`
 
