@@ -1,5 +1,5 @@
-memory = 768
-cpus   = 1
+memory = 1024
+cpus   = 2
 
 Vagrant.configure("2") do |config|
   config.vm.box = "ubuntu/trusty64"
@@ -15,4 +15,5 @@ Vagrant.configure("2") do |config|
   config.vm.provision "shell", inline: "sudo apt-get update"
   config.vm.provision "shell", inline: "sudo apt-get -y install npm nodejs-legacy git ruby-dev"
   config.vm.provision "shell", inline: "sudo npm install -g yo gulp bower"
+  config.vm.provision "shell", inline: "sudo gem install compass"
 end
