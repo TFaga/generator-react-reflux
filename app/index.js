@@ -128,10 +128,6 @@ var ReactRefluxGenerator = yeoman.generators.Base.extend({
       this.dest.mkdir('app/scripts/stores');
       this.dest.mkdir('app/styles');
 
-      if (this.includeJest) {
-        this.dest.mkdir('app/__tests__');
-      }
-
       this.src.copy('app/favicon.ico', 'app/favicon.ico');
       this.src.copy('app/robots.txt', 'app/robots.txt');
       this.src.copy('app/404.html', 'app/404.html');
