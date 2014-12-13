@@ -1,5 +1,4 @@
 'use strict';
-var util = require('util');
 var path = require('path');
 var yeoman = require('yeoman-generator');
 var yosay = require('yosay');
@@ -34,7 +33,7 @@ var ReactRefluxGenerator = yeoman.generators.Base.extend({
       defaults: false
     });
 
-    this.argument('app_name', { 
+    this.argument('appName', { 
       type: String,
       required: false
     });
@@ -53,7 +52,7 @@ var ReactRefluxGenerator = yeoman.generators.Base.extend({
     var prompts = [{
       name: 'projectName',
       message: 'What is the project\'s name?',
-      default: this.app_name || path.basename(path.resolve('.'))
+      default: this.appName || path.basename(path.resolve('.'))
     },
     {
       name: 'desc',
@@ -119,7 +118,8 @@ var ReactRefluxGenerator = yeoman.generators.Base.extend({
   },
 
   writing: {
-    app: function () {
+
+    directories: function () {
       this.dest.mkdir('app');
       this.dest.mkdir('app/images');
       this.dest.mkdir('app/scripts');
@@ -127,7 +127,9 @@ var ReactRefluxGenerator = yeoman.generators.Base.extend({
       this.dest.mkdir('app/scripts/components');
       this.dest.mkdir('app/scripts/stores');
       this.dest.mkdir('app/styles');
+    },
 
+    commonFiles: function () {
       this.src.copy('app/favicon.ico', 'app/favicon.ico');
       this.src.copy('app/robots.txt', 'app/robots.txt');
       this.src.copy('app/404.html', 'app/404.html');
@@ -136,7 +138,9 @@ var ReactRefluxGenerator = yeoman.generators.Base.extend({
       this.template('_package.json', 'package.json');
       this.template('_bower.json', 'bower.json');
       this.template('_README.md', 'README.md');
-      
+    },
+
+    coffeeScript: function () {
       if (this.includeCoffee) {
         this.src.copy('app/scripts/app.coffee', 'app/scripts/app.coffee');
         this.src.copy('app/scripts/router.cjsx', 'app/scripts/router.cjsx');
@@ -149,7 +153,11 @@ var ReactRefluxGenerator = yeoman.generators.Base.extend({
           this.src.copy('__tests__/home-test.cjsx', '__tests__/home-test.cjsx');
           this.src.copy('preprocessor.js.coffee', 'preprocessor.js');
         }
-      } else {
+      }
+    },
+
+    javaScript: function () {
+      if (!this.includeCoffee) {
         this.src.copy('app/scripts/app.js', 'app/scripts/app.js');
         this.src.copy('app/scripts/router.jsx', 'app/scripts/router.jsx');
         this.src.copy('app/scripts/components/layout.jsx', 'app/scripts/components/layout.jsx');
@@ -162,7 +170,9 @@ var ReactRefluxGenerator = yeoman.generators.Base.extend({
           this.src.copy('preprocessor.js', 'preprocessor.js');
         }
       };
+    },
 
+    styleSheets: function () {
       this.src.copy('app/styles/main.' + (this.includeSass ? 'scss' : 'css'),
         'app/styles/main.' + (this.includeSass ? 'scss' : 'css'));
     },

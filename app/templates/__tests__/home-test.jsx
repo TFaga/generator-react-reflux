@@ -12,8 +12,7 @@ describe('HomePage', function() {
     );
 
     // Verify that the title is there
-    var title = TestUtils.findRenderedDOMComponentWithTag(
-      home, 'h1');
+    var title = TestUtils.findRenderedDOMComponentWithTag(home, 'h1');
     expect(title.getDOMNode().textContent).toEqual('\'Allo, \'Allo!');
   });
 });
