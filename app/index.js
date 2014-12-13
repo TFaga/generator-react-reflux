@@ -1,5 +1,4 @@
 'use strict';
-var util = require('util');
 var path = require('path');
 var yeoman = require('yeoman-generator');
 var yosay = require('yosay');
@@ -34,7 +33,7 @@ var ReactRefluxGenerator = yeoman.generators.Base.extend({
       defaults: false
     });
 
-    this.argument('app_name', { 
+    this.argument('appName', { 
       type: String,
       required: false
     });
@@ -53,7 +52,7 @@ var ReactRefluxGenerator = yeoman.generators.Base.extend({
     var prompts = [{
       name: 'projectName',
       message: 'What is the project\'s name?',
-      default: this.app_name || path.basename(path.resolve('.'))
+      default: this.appName || path.basename(path.resolve('.'))
     },
     {
       name: 'desc',
@@ -161,7 +160,7 @@ var ReactRefluxGenerator = yeoman.generators.Base.extend({
           this.src.copy('__tests__/home-test.jsx', '__tests__/home-test.jsx');
           this.src.copy('preprocessor.js', 'preprocessor.js');
         }
-      };
+      }
 
       this.src.copy('app/styles/main.' + (this.includeSass ? 'scss' : 'css'),
         'app/styles/main.' + (this.includeSass ? 'scss' : 'css'));
