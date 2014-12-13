@@ -1,4 +1,6 @@
 var React = require('react');
+var Router = require('react-router');
+var RouteHandler = Router.RouteHandler;
 
 var Layout = React.createClass({
 
@@ -6,7 +8,7 @@ var Layout = React.createClass({
 
     return (
       <div className="App">
-        <this.props.activeRouteHandler/>
+        <RouteHandler />
       </div>
     );
   }
