@@ -5,38 +5,38 @@
   "author": "<%= author %>",
   "license": "<%= license %>",
   "dependencies": {
-    "jquery": "^2.1.1",
-    "react": "~0.12",
+    "jquery": "~2.1.1",
+    "react": "~0.12.1",
     "react-router": "~0.11.4",
-    "reflux": "^0.1.15"
+    "reflux": "~0.2.1"
   },
   "devDependencies": {
-    "browserify": "^6.3.2",<% if (includeCoffee) { %><% if (includeJest) { %>
-    "coffee-react": "^2.0.0",<% } %>
-    "coffee-reactify": "^2.0.0",
-    "coffee-script": "^1.8.0",<% } %>
-    "del": "^0.1.3",
-    "gulp": "~3.8.8",
-    "gulp-autoprefixer": "^1.0.0",<% if (includeSass) { %>
-    "gulp-compass": "^1.3.1",<% } %>
-    "gulp-filter": "^1.0.2",
-    "gulp-htmlmin": "^0.2.0",
-    "gulp-imagemin": "~1.0.1",
-    "gulp-load-plugins": "~0.7.0",
-    "gulp-minify-css": "^0.3.10",
-    "gulp-plumber": "^0.6.5",<% if (includeCoffee) { %>
-    "gulp-rename": "^1.2.0",<% } %>
-    "gulp-rev-all": "^0.6.6",
-    "gulp-rev-replace": "^0.3.1",
-    "gulp-size": "^1.1.0",
-    "gulp-uglify": "^1.0.1",
-    "gulp-useref": "^1.0.2",
-    "gulp-webserver": "^0.8.1",<% if (includeJest) { %>
-    "jest-cli": "^0.1.18",<% } %><% if (!includeCoffee) { %>
+    "browserify": "~7.0.0",<% if (includeCoffee) { %><% if (includeJest) { %>
+    "coffee-react": "~2.1.2",<% } %>
+    "coffee-reactify": "~2.1.0",
+    "coffee-script": "~1.8.0",<% } %>
+    "del": "~1.1.0",
+    "gulp": "~3.8.10",
+    "gulp-autoprefixer": "~2.0.0",<% if (includeSass) { %>
+    "gulp-compass": "^2.0.3",<% } %>
+    "gulp-filter": "~1.0.2",
+    "gulp-htmlmin": "~0.2.0",
+    "gulp-imagemin": "~2.0.0",
+    "gulp-load-plugins": "~0.8.0",
+    "gulp-minify-css": "~0.3.11",
+    "gulp-plumber": "~0.6.6",<% if (includeCoffee) { %>
+    "gulp-rename": "~1.2.0",<% } %>
+    "gulp-rev-all": "~0.7.2",
+    "gulp-rev-replace": "~0.3.1",
+    "gulp-size": "~1.1.0",
+    "gulp-uglify": "~1.0.2",
+    "gulp-useref": "~1.0.2",
+    "gulp-webserver": "~0.8.8",<% if (includeJest) { %>
+    "jest-cli": "~0.2.1",<% } %><% if (!includeCoffee) { %>
     "reactify": "~0.16.0",<% if (includeJest) { %>
     "react-tools": "^0.12.0",<% } } %>
-    "run-sequence": "^1.0.1",
-    "vinyl-source-stream": "^1.0.0"
+    "run-sequence": "~1.0.2",
+    "vinyl-source-stream": "~1.0.0"
   },
   "engines": {
     "node": ">=0.10.0"
