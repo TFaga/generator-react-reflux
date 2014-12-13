@@ -1,4 +1,6 @@
 React = require 'react'
+Router = require 'react-router'
+RouteHandler = Router.RouteHandler
 
 Layout = React.createClass
 
@@ -6,7 +8,7 @@ Layout = React.createClass
 
     return (
       <div className="App">
-        <this.props.activeRouteHandler/>
+        <RouteHandler />
       </div>
     )
 

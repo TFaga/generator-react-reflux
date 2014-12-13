@@ -8,12 +8,11 @@ Layout = require './components/layout'
 Home = require './components/home'
 
 routes = (
-  <Routes>
-    <Route name="layout" path="/" handler={Layout}>
-       <DefaultRoute handler={Home}/>
-    </Route>
-  </Routes>
+	<Route name="layout" path="/" handler={Layout}>
+		<DefaultRoute handler={Home} />
+	</Route>
 )
 
 exports.start = ->
-  React.renderComponent routes, document.getElementById('content')
+	Router.run routes, (Handler) ->
+		React.render <Handler />, document.getElementById('content')
