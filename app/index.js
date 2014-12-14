@@ -169,7 +169,7 @@ var ReactRefluxGenerator = yeoman.generators.Base.extend({
           this.src.copy('__tests__/home-test.jsx', '__tests__/home-test.jsx');
           this.src.copy('preprocessor.js', 'preprocessor.js');
         }
-      };
+      }
     },
 
     styleSheets: function () {
