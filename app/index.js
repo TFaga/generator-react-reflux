@@ -202,7 +202,8 @@ var ReactRefluxGenerator = yeoman.generators.Base.extend({
         } else if (this.buildTool === 'grunt') {
           this.template('_Gruntfile.js', 'Gruntfile.js', {
             yeomanApp: '<%= yeoman.app %>',
-            yeomanDist: '<%= yeoman.dist %>'
+            yeomanDist: '<%= yeoman.dist %>',
+            includeSass: this.includeSass
           });
         }
 

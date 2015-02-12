@@ -42,7 +42,11 @@ module.exports = function (grunt) {
         react: {
           files: ['<%= yeomanApp %>/scripts/**/*.{jsx,js}'],
           tasks: ['browserify:dev']
-        },
+        },<% if (includeSass) { %>
+        styles: {
+          files: ['<%= yeomanApp %>/styles/**/*.{sass,scss}'],
+          tasks: ['compass:dev', 'autoprefixer:dev']
+        },<% } %>
         images: {
           files: [
             '<%= yeomanApp %>/*.html',
@@ -79,7 +83,24 @@ module.exports = function (grunt) {
             }
           }
         }
-      },
+      },<% if (includeSass) { %>
+      compass: {
+        options: {
+          sassDir: '<%= yeomanApp %>/styles',
+          cssDir: '.tmp/styles',
+          specify: '<%= yeomanApp %>/styles/main.scss',
+          imagesDir: '<%= yeomanApp %>/images',
+          javascriptsDir: '<%= yeomanApp %>/scripts',
+          fontsDir: '<%= yeomanApp %>/fonts',
+          relativeAssets: true
+        },
+        dist: {},
+        dev: {
+          options: {
+            debugInfo: true
+          }
+        }
+      },<% } %>
       useminPrepare: {
         src: '<%= yeomanApp %>/index.html',
         options: {
@@ -133,7 +154,11 @@ module.exports = function (grunt) {
           browsers: [
             'last 5 versions'
           ]
-        },
+        },<% if (includeSass) { %>
+        dev: {
+          expand: true,
+          src: '.tmp/styles/*.css'
+        },<% } %>
         dist: {
           expand: true,
           src: '.tmp/concat/styles/*.css'
@@ -165,14 +190,17 @@ module.exports = function (grunt) {
 
   grunt.registerTask('serve', [
     'clean:serve',
-    'browserify:dev',
+    'browserify:dev',<% if (includeSass) { %>
+    'compass:dev',
+    'autoprefixer:dev',<% } %>
     'connect:livereload',
     'watch'
   ]);
 
   grunt.registerTask('build', [
     'clean:dist',
-    'browserify:dist',
+    'browserify:dist',<% if (includeSass) { %>
+    'compass:dist',<% } %>
     'useminPrepare',
     'concat',
     'autoprefixer:dist',
