@@ -179,7 +179,11 @@ var ReactRefluxGenerator = yeoman.generators.Base.extend({
         if (this.buildTool === 'gulp') {
           this.template('_gulpfile.coffee', 'gulpfile.coffee');
         } else if (this.buildTool === 'grunt') {
-
+          this.template('_Gruntfile.coffee', 'Gruntfile.coffee', {
+            yeomanApp: '<%= yeoman.app %>',
+            yeomanDist: '<%= yeoman.dist %>',
+            includeSass: this.includeSass
+          });
         }
 
         if (this.includeJest) {
