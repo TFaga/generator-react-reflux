@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width">
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
 
-    <!-- build:css styles/main.css -->
+    <!-- build:css<% if (buildTool === 'grunt' && includeSass) { %>(.tmp)<% } %> styles/main.css -->
     <link rel="stylesheet" href="styles/main.css">
     <!-- endbuild --><% if (includeModernizr) { %>
     <!-- build:js vendor/modernizr.js -->
@@ -24,7 +24,7 @@
 
     <div id="content"></div>
 
-    <!-- build:js scripts/app.js -->
+    <!-- build:js<% if (buildTool === 'grunt') { %>(.tmp)<% } %> scripts/app.js -->
     <script src="scripts/app.js"></script>
     <!-- endbuild -->
   </body>

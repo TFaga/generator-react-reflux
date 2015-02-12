@@ -28,12 +28,18 @@ var ReactRefluxGenerator = yeoman.generators.Base.extend({
       defaults: false
     });
 
+    this.option('build-tool', {
+      desc: 'Select the build tool',
+      type: String,
+      defaults: 'gulp'
+    });
+
     this.option('skip-install', {
       desc: 'Skip the bower and node installations',
       defaults: false
     });
 
-    this.argument('appName', { 
+    this.argument('appName', {
       type: String,
       required: false
     });
@@ -79,22 +85,37 @@ var ReactRefluxGenerator = yeoman.generators.Base.extend({
       message: 'What more would you like?',
       choices: [
       {
-          name: 'Modernizr',
-          value: 'includeModernizr',
-          checked: this.options.modernizr || false
+        name: 'Modernizr',
+        value: 'includeModernizr',
+        checked: this.options.modernizr || false
       }, {
-          name: 'CoffeeScript',
-          value: 'includeCoffee',
-          checked: this.options.coffee || false
+        name: 'CoffeeScript',
+        value: 'includeCoffee',
+        checked: this.options.coffee || false
       }, {
-          name: 'Sass with Compass',
-          value: 'includeSass',
-          checked: this.options.compass || false
+        name: 'Sass with Compass',
+        value: 'includeSass',
+        checked: this.options.compass || false
       }, {
-          name: 'Jest tests',
-          value: 'includeJest',
-          checked: this.options.jest || false
+        name: 'Jest tests',
+        value: 'includeJest',
+        checked: this.options.jest || false
       }]
+    },
+    {
+      type: 'list',
+      name: 'buildTool',
+      message: 'Which build tool would you like?',
+      choices: [
+      {
+        name: 'Gulp',
+        value: 'gulp'
+      },
+      {
+        name: 'Grunt',
+        value: 'grunt'
+      }],
+      default: this.options['build-tool']
     }];
 
     this.prompt(prompts, function (props) {
@@ -112,6 +133,8 @@ var ReactRefluxGenerator = yeoman.generators.Base.extend({
       this.includeCoffee = hasFeature('includeCoffee');
       this.includeSass = hasFeature('includeSass');
       this.includeJest = hasFeature('includeJest');
+
+      this.buildTool = props.buildTool;
 
       done();
     }.bind(this));
@@ -135,9 +158,14 @@ var ReactRefluxGenerator = yeoman.generators.Base.extend({
       this.src.copy('app/404.html', 'app/404.html');
 
       this.template('app/index.html', 'app/index.html');
-      this.template('_package.json', 'package.json');
       this.template('_bower.json', 'bower.json');
       this.template('_README.md', 'README.md');
+
+      if (this.buildTool === 'gulp') {
+        this.template('_package-gulp.json', 'package.json');
+      } else if (this.buildTool === 'grunt') {
+        this.template('_package-grunt.json', 'package.json');
+      }
     },
 
     coffeeScript: function () {
@@ -147,7 +175,12 @@ var ReactRefluxGenerator = yeoman.generators.Base.extend({
         this.src.copy('app/scripts/components/layout.cjsx', 'app/scripts/components/layout.cjsx');
 
         this.template('app/scripts/components/home.cjsx', 'app/scripts/components/home.cjsx');
-        this.template('_gulpfile.coffee', 'gulpfile.coffee');
+
+        if (this.buildTool === 'gulp') {
+          this.template('_gulpfile.coffee', 'gulpfile.coffee');
+        } else if (this.buildTool === 'grunt') {
+
+        }
 
         if (this.includeJest) {
           this.src.copy('__tests__/home-test.cjsx', '__tests__/home-test.cjsx');
@@ -163,7 +196,15 @@ var ReactRefluxGenerator = yeoman.generators.Base.extend({
         this.src.copy('app/scripts/components/layout.jsx', 'app/scripts/components/layout.jsx');
 
         this.template('app/scripts/components/home.jsx', 'app/scripts/components/home.jsx');
-        this.template('_gulpfile.js', 'gulpfile.js');
+
+        if (this.buildTool === 'gulp') {
+          this.template('_gulpfile.js', 'gulpfile.js');
+        } else if (this.buildTool === 'grunt') {
+          this.template('_Gruntfile.js', 'Gruntfile.js', {
+            yeomanApp: '<%= yeoman.app %>',
+            yeomanDist: '<%= yeoman.dist %>'
+          });
+        }
 
         if (this.includeJest) {
           this.src.copy('__tests__/home-test.jsx', '__tests__/home-test.jsx');
