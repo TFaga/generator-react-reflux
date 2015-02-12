@@ -4,6 +4,8 @@ var yeoman = require('yeoman-generator');
 var yosay = require('yosay');
 var chalk = require('chalk');
 
+var buildTools = ['gulp', 'grunt'];
+
 var ReactRefluxGenerator = yeoman.generators.Base.extend({
   initializing: function () {
     this.pkg = require('../package.json');
@@ -115,7 +117,7 @@ var ReactRefluxGenerator = yeoman.generators.Base.extend({
         name: 'Grunt',
         value: 'grunt'
       }],
-      default: this.options['build-tool']
+      default: buildTools.indexOf(this.options['build-tool']) > -1 ? this.options['build-tool'] : 'gulp'
     }];
 
     this.prompt(prompts, function (props) {
