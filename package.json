@@ -24,7 +24,8 @@
     "scaffold",
     "framework",
     "react-js",
-    "flux"
+    "flux",
+    "reflux"
   ],
   "dependencies": {
     "yeoman-generator": "~0.18.4",
