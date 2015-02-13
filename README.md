@@ -7,6 +7,7 @@
 ## What's inside?
 
 * gulp
+* grunt
 * bower
 * browserify
 * reactify
@@ -75,6 +76,10 @@ Options:
 * `--jest`
 	
 	Generate testing boilerplate with jest.
+
+* `--build-tool=[grunt|gulp]`
+  
+  Generate build config in the selected tool. Defaults to gulp.
 
 * `--skip-install`
 
