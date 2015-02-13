@@ -7,7 +7,7 @@ var helpers = require('yeoman-generator').test;
 var os = require('os');
 
 describe('react-reflux:app', function () {
-  describe('when using no features', function () {
+  describe('when using no features with gulp', function () {
     before(function (done) {
       helpers.run(path.join(__dirname, '../app'))
       .inDir(path.join(os.tmpdir(), './temp-test'))
@@ -25,7 +25,7 @@ describe('react-reflux:app', function () {
     });
 
     it('creates files', function () {
-      assert.file([ 
+      assert.file([
         'app/images',
         'app/scripts/actions',
         'app/scripts/stores',
@@ -46,6 +46,12 @@ describe('react-reflux:app', function () {
         '.editorconfig',
         '.jshintrc',
         'README.md'
+      ]);
+    });
+
+    it('doesn\'t create grunt config', function () {
+      assert.noFile([
+        'Gruntfile.js'
       ]);
     });
 
@@ -70,6 +76,37 @@ describe('react-reflux:app', function () {
 
     it('uses css syntax', function () {
       assert.fileContent('app/styles/main.css', /.hero-unit h1/);
+    });
+  });
+
+  describe('when using no features with grunt', function () {
+    before(function (done) {
+      helpers.run(path.join(__dirname, '../app'))
+      .inDir(path.join(os.tmpdir(), './temp-test'))
+      .withOptions({ 'skip-install': true })
+      .withPrompt({
+        projectName: 'test',
+        desc: 'A test project',
+        author: 'Test Testington',
+        version: '1.0.1',
+        license: 'MIT',
+        features: [
+        ],
+        buildTool: 'grunt'
+      })
+      .on('end', done);
+    });
+
+    it('creates grunt config', function () {
+      assert.file([
+        'Gruntfile.js'
+      ]);
+    });
+
+    it('doesn\'t create gulp config', function () {
+      assert.noFile([
+        'gulpfile.js'
+      ]);
     });
   });
 
@@ -104,7 +141,7 @@ describe('react-reflux:app', function () {
     });
   });
 
-  describe('when using CoffeeScript', function () {
+  describe('when using CoffeeScript with gulp', function () {
     before(function (done) {
       helpers.run(path.join(__dirname, '../app'))
       .inDir(path.join(os.tmpdir(), './temp-test'))
@@ -123,7 +160,7 @@ describe('react-reflux:app', function () {
     });
 
     it('creates coffee and cjsx files', function () {
-      assert.file([ 
+      assert.file([
         'app/scripts/app.coffee',
         'app/scripts/router.cjsx',
         'app/scripts/components/layout.cjsx',
@@ -140,7 +177,9 @@ describe('react-reflux:app', function () {
         'app/scripts/components/layout.jsx',
         'app/scripts/components/home.jsx',
 
-        'gulpfile.js'
+        'gulpfile.js',
+        'Gruntfile.coffee',
+        'Gruntfile.js'
       ]);
     });
 
@@ -157,7 +196,41 @@ describe('react-reflux:app', function () {
     });
   });
 
-  describe('when using compass', function () {
+  describe('when using CoffeeScript with grunt', function () {
+    before(function (done) {
+      helpers.run(path.join(__dirname, '../app'))
+      .inDir(path.join(os.tmpdir(), './temp-test'))
+      .withOptions({ 'skip-install': true })
+      .withPrompt({
+        projectName: 'test',
+        desc: 'A test project',
+        author: 'Test Testington',
+        version: '1.0.1',
+        license: 'MIT',
+        features: [
+          'includeCoffee'
+        ],
+        buildTool: 'grunt'
+      })
+      .on('end', done);
+    });
+
+    it('creates coffee grunt config', function () {
+      assert.file([
+        'Gruntfile.coffee'
+      ]);
+    });
+
+    it('doesn\'t create js or coffee gulp config', function () {
+      assert.noFile([
+        'gulpfile.js',
+        'gulpfile.coffee',
+        'Gruntfile.js'
+      ]);
+    });
+  });
+
+  describe('when using compass with gulp', function () {
     before(function (done) {
       helpers.run(path.join(__dirname, '../app'))
       .inDir(path.join(os.tmpdir(), './temp-test'))
@@ -197,6 +270,34 @@ describe('react-reflux:app', function () {
 
     it('inserts compass to home html component', function () {
       assert.fileContent('app/scripts/components/home.jsx', /<li>Sass with Compass<\/li>/);
+    });
+  });
+
+  describe('when using compass with grunt', function () {
+    before(function (done) {
+      helpers.run(path.join(__dirname, '../app'))
+      .inDir(path.join(os.tmpdir(), './temp-test'))
+      .withOptions({ 'skip-install': true })
+      .withPrompt({
+        projectName: 'test',
+        desc: 'A test project',
+        author: 'Test Testington',
+        version: '1.0.1',
+        license: 'MIT',
+        features: [
+          'includeSass'
+        ],
+        buildTool: 'grunt'
+      })
+      .on('end', done);
+    });
+
+    it('inserts compass to grunt', function () {
+      assert.fileContent('Gruntfile.js', /compass:/);
+    });
+
+    it('inserts compass to package.json', function () {
+      assert.fileContent('package.json', /"grunt-contrib-compass"/);
     });
   });
 
