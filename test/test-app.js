@@ -230,7 +230,7 @@ describe('react-reflux:app', function () {
     });
   });
 
-  describe('when using compass with gulp', function () {
+  describe('when using compass with javascript and gulp', function () {
     before(function (done) {
       helpers.run(path.join(__dirname, '../app'))
       .inDir(path.join(os.tmpdir(), './temp-test'))
@@ -273,7 +273,7 @@ describe('react-reflux:app', function () {
     });
   });
 
-  describe('when using compass with grunt', function () {
+  describe('when using compass with javascript and grunt', function () {
     before(function (done) {
       helpers.run(path.join(__dirname, '../app'))
       .inDir(path.join(os.tmpdir(), './temp-test'))
@@ -298,6 +298,55 @@ describe('react-reflux:app', function () {
 
     it('inserts compass to package.json', function () {
       assert.fileContent('package.json', /"grunt-contrib-compass"/);
+    });
+  });
+
+  describe('when using compass with coffeescript and gulp', function () {
+    before(function (done) {
+      helpers.run(path.join(__dirname, '../app'))
+      .inDir(path.join(os.tmpdir(), './temp-test'))
+      .withOptions({ 'skip-install': true })
+      .withPrompt({
+        projectName: 'test',
+        desc: 'A test project',
+        author: 'Test Testington',
+        version: '1.0.1',
+        license: 'MIT',
+        features: [
+          'includeSass',
+          'includeCoffee'
+        ]
+      })
+      .on('end', done);
+    });
+
+    it('inserts compass to gulp', function () {
+      assert.fileContent('gulpfile.coffee', /'compass'/);
+    });
+  });
+
+  describe('when using compass with coffeescript and grunt', function () {
+    before(function (done) {
+      helpers.run(path.join(__dirname, '../app'))
+      .inDir(path.join(os.tmpdir(), './temp-test'))
+      .withOptions({ 'skip-install': true })
+      .withPrompt({
+        projectName: 'test',
+        desc: 'A test project',
+        author: 'Test Testington',
+        version: '1.0.1',
+        license: 'MIT',
+        features: [
+          'includeSass',
+          'includeCoffee'
+        ],
+        buildTool: 'grunt'
+      })
+      .on('end', done);
+    });
+
+    it('inserts compass to gulp', function () {
+      assert.fileContent('Gruntfile.coffee', /compass:/);
     });
   });
 
