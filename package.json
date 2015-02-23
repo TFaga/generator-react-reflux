@@ -28,8 +28,8 @@
     "reflux"
   ],
   "dependencies": {
-    "yeoman-generator": "~0.18.8",
     "chalk": "~0.5.1",
+    "yeoman-generator": "~0.18.8",
     "yosay": "~1.0.2"
   },
   "devDependencies": {

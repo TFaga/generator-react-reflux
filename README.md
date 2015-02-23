@@ -47,6 +47,7 @@ Run `gulp` for building and `gulp serve` for preview
 Available generators:
 
 * [react-reflux](#app) (aka [react-reflux:app](#app))
+* [react-reflux:component](#component)
 
 **Note: Generators are to be run from the root directory of your app.**
 
@@ -85,6 +86,21 @@ Options:
 
   Skips the automatic execution of `bower` and `npm` after
   scaffolding has finished.
+
+### Component
+
+Generates a ReactJS component in `app/scripts/components`.
+
+Example:
+```bash
+yo react-reflux:component dashboard
+```
+
+Options:
+
+* `--coffee-script`
+  
+  Generate the component in CoffeeScript.
 
 ## Testing
 

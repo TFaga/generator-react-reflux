@@ -1,4 +1,3 @@
-'use strict';
 var path = require('path');
 var yeoman = require('yeoman-generator');
 var yosay = require('yosay');
