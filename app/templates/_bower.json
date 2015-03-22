@@ -15,7 +15,8 @@
     "test",
     "tests"
   ],
-  "dependencies": {<% if (includeModernizr) { %>
+  "dependencies": {
+    "bootstrap-sass": ">=3.3.4",<% if (includeModernizr) { %>
     "modernizr": "~2.8.3"<% } %>
   }
 }
