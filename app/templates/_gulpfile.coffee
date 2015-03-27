@@ -1,12 +1,14 @@
-gulp        = require 'gulp'
+gulp          = require 'gulp'
 
-$           = require('gulp-load-plugins')()
-del         = require 'del'
-source      = require 'vinyl-source-stream'
-browserify  = require 'browserify'
-runSequence = require 'run-sequence'
+$             = require('gulp-load-plugins')()
+del           = require 'del'
+source        = require 'vinyl-source-stream'
+browserify    = require 'browserify'
+preprocessify = require 'preprocessify'
+runSequence   = require 'run-sequence'
+domain        = require 'domain'
 
-env         = 'dev'
+env           = 'dev'
 
 gulp.task 'clean:dev', ->
   del ['.tmp']
@@ -15,32 +17,52 @@ gulp.task 'clean:dist', ->
   del ['dist']
 
 gulp.task 'scripts', ->
-  bundler = browserify './app/scripts/app.coffee',
-    extensions: ['.cjsx', '.coffee']
-    debug: env == 'dev'
-  .transform 'coffee-reactify' 
+  filePath = './app/scripts/app.coffee'
+  extensions = ['.cjsx', '.coffee']
+  debug = env is 'dev'
 
-  bundler.bundle()
-    .pipe source('app.js')
-    .pipe gulp.dest('.tmp/scripts')
+  bundle = ->
+    browserify
+      entries: [filePath]
+      extensions: extensions
+      debug: debug
+    .transform preprocessify { env: env, debug: debug },
+      includeExtensions: extensions
+    .transform 'coffee-reactify'
+    .bundle()
+      .pipe source 'app.js'
+      .pipe gulp.dest '.tmp/scripts'
+
+  if env is 'dev'
+    return gulp.src filePath
+      .pipe $.plumber()
+      .pipe $.tap (file) ->
+        d = domain.create()
+        d.on 'error', (err) ->
+          $.util.log $.util.colors.red('Browserify compile error:'), err.message, '\n\t', $.util.colors.cyan('in file'), file.path
+          $.util.beep()
+        d.run bundle
+  else return bundle()
 <% if (includeSass) { %>
 gulp.task 'compass', ->
-  gulp.src 'app/styles/**/*.scss'
+  dev = env is 'dev'
+  return gulp.src 'app/styles/**/*.scss'
     .pipe $.plumber()
+    .pipe $.if dev, $.cached 'compass'
     .pipe $.compass
       css: '.tmp/styles'
       sass: 'app/styles'<% } %>
 
 gulp.task 'imagemin', ->
-  gulp.src 'app/images/*'
+  return gulp.src 'app/images/*'
     .pipe $.imagemin
-            progressive: true
-            svgoPlugins: [ removeViewBox: false ]
-    .pipe gulp.dest('dist/images')
+      progressive: true
+      svgoPlugins: [ removeViewBox: false ]
+    .pipe gulp.dest 'dist/images'
 
 gulp.task 'copy', ->
-  gulp.src ['app/*.txt', 'app/*.ico']
-    .pipe gulp.dest('dist')
+  return gulp.src ['app/*.txt', 'app/*.ico']
+    .pipe gulp.dest 'dist'
 
 gulp.task 'bundle', ->
   assets = $.useref.assets searchPath: '{.tmp,app}'
@@ -48,7 +70,8 @@ gulp.task 'bundle', ->
   cssFilter = $.filter ['**/*.css']
   htmlFilter = $.filter ['*.html']
 
-  gulp.src 'app/*.html'
+  return gulp.src 'app/*.html'
+    .pipe $.preprocess()
     .pipe assets
     .pipe assets.restore()
     .pipe $.useref()
@@ -61,34 +84,33 @@ gulp.task 'bundle', ->
     .pipe $.minifyCss()
     .pipe cssFilter.restore()
     .pipe htmlFilter
-    .pipe $.htmlmin(collapseWhitespace: true)
+    .pipe $.htmlmin collapseWhitespace: true
     .pipe htmlFilter.restore()
-    .pipe $.revAll( ignore: [/^\/favicon.ico$/g, '.html'] )
+    .pipe $.revAll ignore: [/^\/favicon.ico$/g, '.html']
     .pipe $.revReplace()
-    .pipe gulp.dest('dist')
+    .pipe gulp.dest 'dist'
     .pipe $.size()
 
 gulp.task 'webserver', ->
-  gulp.src ['.tmp', 'app']
+  return gulp.src ['.tmp', 'app']
     .pipe $.webserver
-      host: '0.0.0.0', #change to 'localhost' to disable outside connections
+      host: '0.0.0.0' #change to 'localhost' to disable outside connections
+      port: 8080
       livereload: true
       open: true
 
 gulp.task 'serve', ->
   runSequence 'clean:dev', ['scripts'<% if (includeSass) { %>, 'compass'<% } %>], 'webserver'
-
   gulp.watch 'app/*.html'
-
   gulp.watch 'app/scripts/**/*.coffee', ['scripts']
-
-  gulp.watch 'app/scripts/**/*.cjsx', ['scripts']
-  <% if (includeSass) { %>
-  gulp.watch 'app/styles/**/*.scss', ['compass']<% } %>
+  gulp.watch 'app/scripts/**/*.cjsx', ['scripts']<% if (includeSass) { %>
+  compass = gulp.watch 'app/styles/**/*.scss', ['compass']
+  compass.on 'change', (event) ->
+    if event.type is 'deleted'
+      delete $.cached.caches['compass'][event.path]<% } %>
 
 gulp.task 'build', ->
   env = 'prod'
-
   runSequence ['clean:dev', 'clean:dist'],
-              ['scripts',<% if (includeSass) { %> 'compass',<% } %> 'imagemin', 'copy'],
-              'bundle'
+              ['scripts',<% if (includeSass) { %> 'compass',<% } %> 'imagemin'],
+              ['bundle', 'copy']

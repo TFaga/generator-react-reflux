@@ -17,6 +17,8 @@
 * reactjs
 * reflux
 * react-router
+* bootstrap (Twitter Bootstrap's official Sass version)
+* preprocessify (for environments management)
 
 ## Usage
 
