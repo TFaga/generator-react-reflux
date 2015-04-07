@@ -10,6 +10,13 @@
     "email": "tilen.faganel@me.com",
     "url": "https://github.com/TFaga"
   },
+  "contributors": [
+    {
+      "name": "o_constant",
+      "email": "olivier.constant.pro@gmail.com",
+      "url": "https://github.com/pistolero77"
+    }
+  ],
   "engines": {
     "node": ">=0.10.0"
   },
