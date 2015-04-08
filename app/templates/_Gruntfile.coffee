@@ -167,3 +167,4 @@ module.exports = (grunt) ->
     'htmlmin'
   ]
 
+  grunt.registerTask 'default', 'build'

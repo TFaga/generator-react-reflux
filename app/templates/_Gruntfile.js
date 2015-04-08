@@ -212,4 +212,6 @@ module.exports = function (grunt) {
     'usemin',
     'htmlmin'
   ]);
+
+  grunt.registerTask('default', 'build');
 };

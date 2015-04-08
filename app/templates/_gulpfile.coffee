@@ -114,3 +114,5 @@ gulp.task 'build', ->
   runSequence ['clean:dev', 'clean:dist'],
               ['scripts',<% if (includeSass) { %> 'compass',<% } %> 'imagemin'],
               ['bundle', 'copy']
+
+gulp.task 'default', ['build']

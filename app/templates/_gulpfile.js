@@ -106,3 +106,5 @@ gulp.task('build', function() {
               ['scripts',<% if (includeSass) { %> 'compass',<% } %> 'imagemin', 'copy'],
               'bundle');
 });
+
+gulp.task('default', ['build']);
