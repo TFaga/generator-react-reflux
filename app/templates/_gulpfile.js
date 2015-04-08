@@ -1,12 +1,14 @@
-var gulp        = require('gulp');
+var gulp          = require('gulp');
 
-var $           = require('gulp-load-plugins')();
-var del         = require('del');
-var source      = require('vinyl-source-stream');
-var browserify  = require('browserify');
-var runSequence = require('run-sequence');
+var $             = require('gulp-load-plugins')();
+var del           = require('del');
+var source        = require('vinyl-source-stream');
+var browserify    = require('browserify');
+var preprocessify = require('preprocessify');
+var runSequence   = require('run-sequence');
+var domain        = require('domain');
 
-var env = 'dev';
+var env           = 'dev';
 
 gulp.task('clean:dev', function() {
   return del(['.tmp']);
@@ -17,19 +19,48 @@ gulp.task('clean:dist', function() {
 });
 
 gulp.task('scripts', function() {
-  var bundler = browserify('./app/scripts/app.js', {
-    extensions: ['.jsx'],
-    debug: env == 'dev'
-  }).transform('reactify');
+  var filePath = './app/scripts/app.js';
+  var extensions = ['.jsx'];
+  var debug = env === 'dev'
 
-  return bundler.bundle()
-    .pipe(source('app.js'))
-    .pipe(gulp.dest('.tmp/scripts'));
+  var bundle = function() {
+    return browserify({
+      entries: [filePath],
+      extensions: extensions,
+      debug: debug
+    }).transform(preprocessify({
+      env: env,
+      debug: debug
+    }, {
+      includeExtensions: extensions
+    })).transform('reactify')
+    .bundle()
+      .pipe(source('app.js'))
+      .pipe(gulp.dest('.tmp/scripts'));
+  }
+
+  if (env === 'dev') {
+    return gulp.src(filePath)
+      .pipe($.plumber())
+      .pipe($.tap(function(file) {
+        var d = domain.create();
+
+        d.on('error', function(err) {
+          $.util.log($.util.colors.red('Browserify compile error:'), err.message, '\n\t', $.util.colors.cyan('in file'), file.path);
+          $.util.beep();
+        });
+
+        d.run(bundle);
+      }));
+  } else {
+    return bundle();
+  }
 });
 <% if (includeSass) { %>
 gulp.task('compass', function() {
   return gulp.src('app/styles/**/*.scss')
     .pipe($.plumber())
+    .pipe($.if(env === 'dev', $.cached('compass')))
     .pipe($.compass({
       css: '.tmp/styles',
       sass: 'app/styles'
@@ -57,6 +88,7 @@ gulp.task('bundle', function () {
   var htmlFilter = $.filter(['*.html']);
 
   return gulp.src('app/*.html')
+    .pipe($.preprocess())
     .pipe(assets)
     .pipe(assets.restore())
     .pipe($.useref())
@@ -94,17 +126,22 @@ gulp.task('serve', function() {
 
   gulp.watch('app/scripts/**/*.js', ['scripts']);
 
-  gulp.watch('app/scripts/**/*.jsx', ['scripts']);
-  <% if (includeSass) { %>
-  gulp.watch('app/styles/**/*.scss', ['compass']);<% } %>
+  gulp.watch('app/scripts/**/*.jsx', ['scripts']);<% if (includeSass) { %>
+
+  gulp.watch('app/styles/**/*.scss', ['compass'])
+    .on('change', function (event) {
+      if (event.type === 'deleted') {
+        delete $.cached.caches['compass'][event.path];
+      }
+    });<% } %>
 });
 
 gulp.task('build', function() {
   env = 'prod';
 
   runSequence(['clean:dev', 'clean:dist'],
-              ['scripts',<% if (includeSass) { %> 'compass',<% } %> 'imagemin', 'copy'],
-              'bundle');
+              ['scripts',<% if (includeSass) { %> 'compass',<% } %> 'imagemin'],
+              'bundle', 'copy');
 });
 
 gulp.task('default', ['build']);

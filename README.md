@@ -51,6 +51,7 @@ Available generators:
 * [react-reflux](#app) (aka [react-reflux:app](#app))
 * [react-reflux:component](#component)
 * [react-reflux:store](#store)
+* [react-reflux:actions](#actions)
 
 **Note: Generators are to be run from the root directory of your app.**
 
@@ -119,6 +120,21 @@ Options:
 * `--coffee-script`
   
   Generate the store in CoffeeScript.
+
+### Actions
+
+Generates RefluxJS actions in `app/scripts/actions`.
+
+Example:
+```bash
+yo react-reflux:actions user
+```
+
+Options:
+
+* `--coffee-script`
+  
+  Generate the actions in CoffeeScript.
 
 ## Testing
 
