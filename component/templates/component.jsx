@@ -1,6 +1,6 @@
 var React = require('react');
 
-var <%= _.camelize('_' + path.basename(componentName)) %> = React.createClass({
+var <%= lodash.capitalize(path.basename(componentName)) %> = React.createClass({
 
   render: function() {
 
@@ -12,4 +12,4 @@ var <%= _.camelize('_' + path.basename(componentName)) %> = React.createClass({
   }
 });
 
-module.exports = <%= _.camelize('_' + path.basename(componentName)) %>;
+module.exports = <%= lodash.capitalize(path.basename(componentName)) %>;

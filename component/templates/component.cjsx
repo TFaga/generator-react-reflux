@@ -1,6 +1,6 @@
 React = require 'react'
 
-<%= _.camelize('_' + path.basename(componentName)) %> = React.createClass
+<%= lodash.capitalize(path.basename(componentName)) %> = React.createClass
 
   render: ->
 
@@ -10,4 +10,4 @@ React = require 'react'
       </div>
     )
 
-module.exports = <%= _.camelize('_' + path.basename(componentName)) %>
+module.exports = <%= lodash.capitalize(path.basename(componentName)) %>

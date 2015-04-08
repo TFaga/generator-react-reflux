@@ -24,7 +24,9 @@
     "test": "mocha"
   },
   "files": [
-    "app"
+    "app",
+    "component",
+    "store"
   ],
   "keywords": [
     "yeoman-generator",
@@ -35,9 +37,10 @@
     "reflux"
   ],
   "dependencies": {
-    "chalk": "~0.5.1",
-    "yeoman-generator": "~0.18.8",
-    "yosay": "~1.0.2"
+    "chalk": "~1.0.0",
+    "lodash": "~3.6.0",
+    "yeoman-generator": "~0.19.1",
+    "yosay": "~1.0.3"
   },
   "devDependencies": {
     "mocha": "*"
