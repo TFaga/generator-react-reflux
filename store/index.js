@@ -1,10 +1,11 @@
 var path = require('path');
 var yeoman = require('yeoman-generator');
+var _ = require('lodash');
 
 var StoreGenerator = yeoman.generators.Base.extend({
   initializing: function () {
     this.pkg = require('../package.json');
-    this.lodash = require('lodash');
+    this.lodash = _;
     this.path = path;
 
     this.option('coffee-script', {
@@ -23,8 +24,8 @@ var StoreGenerator = yeoman.generators.Base.extend({
     coffeeScript: function () {
       if (this.options['coffee-script']) {
         this.fs.copyTpl(
-          this.templatePath('store.cjsx'),
-          this.destinationPath('app/scripts/stores/' + this.storeName + '.cjsx'),
+          this.templatePath('store.coffee'),
+          this.destinationPath('app/scripts/stores/' + path.dirname(this.storeName) + '/' + _.capitalize(path.basename(this.storeName)) + 'Store.coffee'),
           this
         );
       }
@@ -33,8 +34,8 @@ var StoreGenerator = yeoman.generators.Base.extend({
     javaScript: function () {
       if (!this.options['coffee-script']) {
         this.fs.copyTpl(
-          this.templatePath('store.jsx'),
-          this.destinationPath('app/scripts/stores/' + this.storeName + '.jsx'),
+          this.templatePath('store.js'),
+          this.destinationPath('app/scripts/stores/' + path.dirname(this.storeName) + '/' + _.capitalize(path.basename(this.storeName)) + 'Store.js'),
           this
         );
       }

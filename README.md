@@ -42,7 +42,7 @@ If selected install `compass`
 gem install compass
 ```
 
-Run `gulp` for building and `gulp serve` for preview
+If you chose gulp then run `gulp` for building and `gulp serve` for preview. However if you chose grunt then run `grunt` for building and `grunt server` for preview.
 
 ## Generators
 
@@ -50,6 +50,7 @@ Available generators:
 
 * [react-reflux](#app) (aka [react-reflux:app](#app))
 * [react-reflux:component](#component)
+* [react-reflux:store](#store)
 
 **Note: Generators are to be run from the root directory of your app.**
 
@@ -103,6 +104,21 @@ Options:
 * `--coffee-script`
   
   Generate the component in CoffeeScript.
+
+### Store
+
+Generates a RefluxJS store in `app/scripts/stores`.
+
+Example:
+```bash
+yo react-reflux:store user
+```
+
+Options:
+
+* `--coffee-script`
+  
+  Generate the store in CoffeeScript.
 
 ## Testing
 
