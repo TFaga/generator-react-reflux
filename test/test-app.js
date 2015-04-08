@@ -12,7 +12,7 @@ describe('react-reflux:app', function () {
       helpers.run(path.join(__dirname, '../app'))
       .inDir(path.join(os.tmpdir(), './temp-test'))
       .withOptions({ 'skip-install': true })
-      .withPrompt({
+      .withPrompts({
         projectName: 'test',
         desc: 'A test project',
         author: 'Test Testington',
@@ -26,10 +26,6 @@ describe('react-reflux:app', function () {
 
     it('creates files', function () {
       assert.file([
-        'app/images',
-        'app/scripts/actions',
-        'app/scripts/stores',
-
         'app/favicon.ico',
         'app/robots.txt',
         'app/404.html',
@@ -84,7 +80,7 @@ describe('react-reflux:app', function () {
       helpers.run(path.join(__dirname, '../app'))
       .inDir(path.join(os.tmpdir(), './temp-test'))
       .withOptions({ 'skip-install': true })
-      .withPrompt({
+      .withPrompts({
         projectName: 'test',
         desc: 'A test project',
         author: 'Test Testington',
@@ -115,7 +111,7 @@ describe('react-reflux:app', function () {
       helpers.run(path.join(__dirname, '../app'))
       .inDir(path.join(os.tmpdir(), './temp-test'))
       .withOptions({ 'skip-install': true })
-      .withPrompt({
+      .withPrompts({
         projectName: 'test',
         desc: 'A test project',
         author: 'Test Testington',
@@ -146,7 +142,7 @@ describe('react-reflux:app', function () {
       helpers.run(path.join(__dirname, '../app'))
       .inDir(path.join(os.tmpdir(), './temp-test'))
       .withOptions({ 'skip-install': true })
-      .withPrompt({
+      .withPrompts({
         projectName: 'test',
         desc: 'A test project',
         author: 'Test Testington',
@@ -201,7 +197,7 @@ describe('react-reflux:app', function () {
       helpers.run(path.join(__dirname, '../app'))
       .inDir(path.join(os.tmpdir(), './temp-test'))
       .withOptions({ 'skip-install': true })
-      .withPrompt({
+      .withPrompts({
         projectName: 'test',
         desc: 'A test project',
         author: 'Test Testington',
@@ -235,7 +231,7 @@ describe('react-reflux:app', function () {
       helpers.run(path.join(__dirname, '../app'))
       .inDir(path.join(os.tmpdir(), './temp-test'))
       .withOptions({ 'skip-install': true })
-      .withPrompt({
+      .withPrompts({
         projectName: 'test',
         desc: 'A test project',
         author: 'Test Testington',
@@ -278,7 +274,7 @@ describe('react-reflux:app', function () {
       helpers.run(path.join(__dirname, '../app'))
       .inDir(path.join(os.tmpdir(), './temp-test'))
       .withOptions({ 'skip-install': true })
-      .withPrompt({
+      .withPrompts({
         projectName: 'test',
         desc: 'A test project',
         author: 'Test Testington',
@@ -306,7 +302,7 @@ describe('react-reflux:app', function () {
       helpers.run(path.join(__dirname, '../app'))
       .inDir(path.join(os.tmpdir(), './temp-test'))
       .withOptions({ 'skip-install': true })
-      .withPrompt({
+      .withPrompts({
         projectName: 'test',
         desc: 'A test project',
         author: 'Test Testington',
@@ -330,7 +326,7 @@ describe('react-reflux:app', function () {
       helpers.run(path.join(__dirname, '../app'))
       .inDir(path.join(os.tmpdir(), './temp-test'))
       .withOptions({ 'skip-install': true })
-      .withPrompt({
+      .withPrompts({
         projectName: 'test',
         desc: 'A test project',
         author: 'Test Testington',
@@ -355,7 +351,7 @@ describe('react-reflux:app', function () {
       helpers.run(path.join(__dirname, '../app'))
       .inDir(path.join(os.tmpdir(), './temp-test'))
       .withOptions({ 'skip-install': true })
-      .withPrompt({
+      .withPrompts({
         projectName: 'test',
         desc: 'A test project',
         author: 'Test Testington',
@@ -406,7 +402,7 @@ describe('react-reflux:app', function () {
       helpers.run(path.join(__dirname, '../app'))
       .inDir(path.join(os.tmpdir(), './temp-test'))
       .withOptions({ 'skip-install': true })
-      .withPrompt({
+      .withPrompts({
         projectName: 'test',
         desc: 'A test project',
         author: 'Test Testington',
