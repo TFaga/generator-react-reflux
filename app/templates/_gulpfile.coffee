@@ -19,14 +19,13 @@ gulp.task 'clean:dist', ->
 gulp.task 'scripts', ->
   filePath = './app/scripts/app.coffee'
   extensions = ['.cjsx', '.coffee']
-  debug = env is 'dev'
 
   bundle = ->
     browserify
       entries: [filePath]
       extensions: extensions
-      debug: debug
-    .transform preprocessify { env: env, debug: debug },
+      debug: env is 'dev'
+    .transform preprocessify { env: env },
       includeExtensions: extensions
     .transform 'coffee-reactify'
     .bundle()

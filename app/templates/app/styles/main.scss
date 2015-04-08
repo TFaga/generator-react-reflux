@@ -1,7 +1,3 @@
-$icon-font-path: "../vendor/bootstrap-sass/assets/fonts/bootstrap/";
-@import "../vendor/bootstrap-sass/assets/stylesheets/bootstrap-sprockets";
-@import "../vendor/bootstrap-sass/assets/stylesheets/bootstrap";
-
 body {
     background: #fafafa;
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
@@ -17,6 +13,7 @@ body {
     background-color: #eee;
     border-radius: 6px;
     padding: 60px;
+
     h1 {
         font-size: 60px;
         line-height: 1;

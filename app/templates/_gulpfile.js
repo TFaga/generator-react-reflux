@@ -21,16 +21,14 @@ gulp.task('clean:dist', function() {
 gulp.task('scripts', function() {
   var filePath = './app/scripts/app.js';
   var extensions = ['.jsx'];
-  var debug = env === 'dev'
 
   var bundle = function() {
     return browserify({
       entries: [filePath],
       extensions: extensions,
-      debug: debug
+      debug: env === 'dev'
     }).transform(preprocessify({
       env: env,
-      debug: debug
     }, {
       includeExtensions: extensions
     })).transform('reactify')
