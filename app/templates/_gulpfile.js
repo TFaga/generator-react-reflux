@@ -28,7 +28,7 @@ gulp.task('scripts', function() {
       extensions: extensions,
       debug: env === 'dev'
     }).transform(preprocessify({
-      env: env,
+      env: env
     }, {
       includeExtensions: extensions
     })).transform('reactify')
@@ -119,13 +119,9 @@ gulp.task('webserver', function() {
 
 gulp.task('serve', function() {
   runSequence('clean:dev', ['scripts'<% if (includeSass) { %>, 'compass'<% } %>], 'webserver');
-
   gulp.watch('app/*.html');
-
   gulp.watch('app/scripts/**/*.js', ['scripts']);
-
   gulp.watch('app/scripts/**/*.jsx', ['scripts']);<% if (includeSass) { %>
-
   gulp.watch('app/styles/**/*.scss', ['compass'])
     .on('change', function (event) {
       if (event.type === 'deleted') {
@@ -136,7 +132,6 @@ gulp.task('serve', function() {
 
 gulp.task('build', function() {
   env = 'prod';
-
   runSequence(['clean:dev', 'clean:dist'],
               ['scripts',<% if (includeSass) { %> 'compass',<% } %> 'imagemin'],
               'bundle', 'copy');
