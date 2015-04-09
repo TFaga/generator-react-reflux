@@ -34,7 +34,7 @@ gulp.task('scripts', function() {
     })).transform('reactify')
     .bundle()
       .pipe(source('app.js'))
-      .pipe(gulp.dest('.tmp/scripts'));
+      .pipe(gulp.dest('.tmp/scripts/bundle'));
   }
 
   if (env === 'dev') {
@@ -81,6 +81,7 @@ gulp.task('copy', function() {
 
 gulp.task('bundle', function () {
   var assets = $.useref.assets({searchPath: '{.tmp,app}'});
+  var revAll = new $.revAll({dontRenameFile: [/^\/favicon.ico$/g, '.html']});
   var jsFilter = $.filter(['**/*.js']);
   var cssFilter = $.filter(['**/*.css']);
   var htmlFilter = $.filter(['*.html']);
@@ -102,8 +103,7 @@ gulp.task('bundle', function () {
     .pipe(htmlFilter)
     .pipe($.htmlmin({collapseWhitespace: true}))
     .pipe(htmlFilter.restore())
-    .pipe($.revAll({ ignore: [/^\/favicon.ico$/g, '.html'] }))
-    .pipe($.revReplace())
+    .pipe(revAll.revision())
     .pipe(gulp.dest('dist'))
     .pipe($.size());
 });

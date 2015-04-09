@@ -30,7 +30,7 @@ gulp.task 'scripts', ->
     .transform 'coffee-reactify'
     .bundle()
       .pipe source 'app.js'
-      .pipe gulp.dest '.tmp/scripts'
+      .pipe gulp.dest '.tmp/scripts/bundle'
 
   if env is 'dev'
     return gulp.src filePath
@@ -65,6 +65,7 @@ gulp.task 'copy', ->
 
 gulp.task 'bundle', ->
   assets = $.useref.assets searchPath: '{.tmp,app}'
+  revAll = new $.revAll dontRenameFile: [/^\/favicon.ico$/g, '.html']
   jsFilter = $.filter ['**/*.js']
   cssFilter = $.filter ['**/*.css']
   htmlFilter = $.filter ['*.html']
@@ -85,8 +86,7 @@ gulp.task 'bundle', ->
     .pipe htmlFilter
     .pipe $.htmlmin collapseWhitespace: true
     .pipe htmlFilter.restore()
-    .pipe $.revAll ignore: [/^\/favicon.ico$/g, '.html']
-    .pipe $.revReplace()
+    .pipe revAll.revision()
     .pipe gulp.dest 'dist'
     .pipe $.size()
 
