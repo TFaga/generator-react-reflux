@@ -64,7 +64,7 @@ module.exports = function (grunt) {
         },
         dist: {
           files: {
-            '.tmp/scripts/app.js': '<%= yeomanApp %>/scripts/app.js'
+            '.tmp/scripts/bundle/app.js': '<%= yeomanApp %>/scripts/app.js'
           },
           options: {
             browserifyOptions: {
@@ -74,7 +74,7 @@ module.exports = function (grunt) {
         },
         dev: {
           files: {
-            '.tmp/scripts/app.js': '<%= yeomanApp %>/scripts/app.js',
+            '.tmp/scripts/bundle/app.js': '<%= yeomanApp %>/scripts/app.js',
           },
           options: {
             browserifyOptions: {

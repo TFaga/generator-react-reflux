@@ -49,13 +49,13 @@ module.exports = (grunt) ->
         transform: ['coffee-reactify']
       dist:
         files:
-          '.tmp/scripts/app.js': '<%= yeomanApp %>/scripts/app.coffee'
+          '.tmp/scripts/bundle/app.js': '<%= yeomanApp %>/scripts/app.coffee'
         options:
           browserifyOptions:
             extensions: ['.cjsx', '.coffee']
       dev:
         files:
-          '.tmp/scripts/app.js': '<%= yeomanApp %>/scripts/app.coffee'
+          '.tmp/scripts/bundle/app.js': '<%= yeomanApp %>/scripts/app.coffee'
         options:
           browserifyOptions:
             debug: true
