@@ -9,6 +9,15 @@ runSequence   = require 'run-sequence'
 domain        = require 'domain'
 
 env           = 'dev'
+webserver     = false
+
+log = (task, start) ->
+  if not start then setTimeout ->
+    $.util.log 'Starting', '\'' + $.util.colors.cyan(task) + '\'...'
+  , 1
+  else
+    time = ((new Date() - start) / 1000).toFixed(2) + ' s'
+    $.util.log 'Finished', '\'' + $.util.colors.cyan(task) + '\'', 'after', $.util.colors.magenta(time)
 
 gulp.task 'clean:dev', ->
   del ['.tmp']
@@ -17,10 +26,14 @@ gulp.task 'clean:dist', ->
   del ['dist']
 
 gulp.task 'scripts', ->
+  dev = env is 'dev'
   filePath = './app/scripts/app.coffee'
   extensions = ['.cjsx', '.coffee']
 
   bundle = ->
+    if dev
+      start = new Date()
+      log 'scripts:bundle'
     browserify
       entries: [filePath]
       extensions: extensions
@@ -31,9 +44,12 @@ gulp.task 'scripts', ->
     .bundle()
       .pipe source 'app.js'
       .pipe gulp.dest '.tmp/scripts/bundle'
+      .pipe $.if dev, $.tap ->
+        log 'scripts:bundle', start
+        if not webserver then runSequence 'webserver'
 
-  if env is 'dev'
-    return gulp.src filePath
+  if dev
+    gulp.src filePath
       .pipe $.plumber()
       .pipe $.tap (file) ->
         d = domain.create()
@@ -41,7 +57,7 @@ gulp.task 'scripts', ->
           $.util.log $.util.colors.red('Browserify compile error:'), err.message, '\n\t', $.util.colors.cyan('in file'), file.path
           $.util.beep()
         d.run bundle
-  else return bundle()
+  else bundle()
 <% if (includeSass) { %>
 gulp.task 'compass', ->
   dev = env is 'dev'
@@ -91,15 +107,20 @@ gulp.task 'bundle', ->
     .pipe $.size()
 
 gulp.task 'webserver', ->
-  return gulp.src ['.tmp', 'app']
+  webserver = gulp.src ['.tmp', 'app']
     .pipe $.webserver
       host: '0.0.0.0' #change to 'localhost' to disable outside connections
-      port: 8080
-      livereload: true
+      livereload:
+        enable: true
+        filter: (filePath) ->
+          if /app\\(?=scripts|styles)/.test filePath
+            $.util.log 'Ignoring', $.util.colors.magenta filePath
+            return false
+          else return true
       open: true
 
 gulp.task 'serve', ->
-  runSequence 'clean:dev', ['scripts'<% if (includeSass) { %>, 'compass'<% } %>], 'webserver'
+  runSequence 'clean:dev', ['scripts'<% if (includeSass) { %>, 'compass'<% } %>]
   gulp.watch 'app/*.html'
   gulp.watch 'app/scripts/**/*.coffee', ['scripts']
   gulp.watch 'app/scripts/**/*.cjsx', ['scripts']<% if (includeSass) { %>
