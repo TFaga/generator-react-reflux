@@ -113,7 +113,7 @@ gulp.task 'webserver', ->
       livereload:
         enable: true
         filter: (filePath) ->
-          if /app\\(?=scripts|styles)/.test filePath
+          if /app\\(?=scripts<% if (includeSass) { %>|styles<% } %>)/.test filePath
             $.util.log 'Ignoring', $.util.colors.magenta filePath
             return false
           else return true
