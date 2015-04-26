@@ -28,6 +28,11 @@ Optional:
 
 ## Usage
 
+Install `Yeoman`:
+```
+npm install -g yo
+```
+
 Install `generator-react-reflux`:
 ```
 npm install -g generator-react-reflux
