@@ -139,7 +139,7 @@ gulp.task('webserver', function() {
       livereload: {
         enable: true,
         filter: function(filePath) {
-          if (/app\\(?=scripts|styles)/.test(filePath)) {
+          if (/app\\(?=scripts<% if (includeSass) { %>|styles<% } %>)/.test(filePath)) {
             $.util.log('Ignoring', $.util.colors.magenta(filePath));
             return false;
           } else {
