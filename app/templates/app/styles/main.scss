@@ -1,4 +1,8 @@
-body {
+<% if (includeBootstrap) { %>$icon-font-path: "../vendor/bootstrap-sass/assets/fonts/bootstrap/";
+@import "../vendor/bootstrap-sass/assets/stylesheets/bootstrap-sprockets";
+@import "../vendor/bootstrap-sass/assets/stylesheets/bootstrap";
+
+<% } %>body {
     background: #fafafa;
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     color: #333;
