@@ -91,7 +91,11 @@ Options:
 
 * `--jest`
 	
-	Generate testing boilerplate with jest.
+	Generate testing boilerplate with Jest.
+	
+* `--bootstrap`
+  
+	Include React Bootstrap.
 
 * `--build-tool=[grunt|gulp]`
   
