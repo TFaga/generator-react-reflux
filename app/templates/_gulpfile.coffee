@@ -80,13 +80,13 @@ gulp.task 'copy', ->
     .pipe gulp.dest 'dist'
 
 gulp.task 'bundle', ->
-  assets = $.useref.assets searchPath: '{.tmp,app}'
+  assets = $.useref.assets()
   revAll = new $.revAll dontRenameFile: [/^\/favicon.ico$/g, '.html']
   jsFilter = $.filter ['**/*.js']
   cssFilter = $.filter ['**/*.css']
   htmlFilter = $.filter ['*.html']
 
-  return gulp.src 'app/*.html'
+  return gulp.src 'app/index.html'
     .pipe $.preprocess()
     .pipe assets
     .pipe assets.restore()

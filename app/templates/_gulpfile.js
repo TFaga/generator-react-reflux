@@ -104,13 +104,13 @@ gulp.task('copy', function() {
 })
 
 gulp.task('bundle', function () {
-  var assets = $.useref.assets({searchPath: '{.tmp,app}'});
+  var assets = $.useref.assets();
   var revAll = new $.revAll({dontRenameFile: [/^\/favicon.ico$/g, '.html']});
   var jsFilter = $.filter(['**/*.js']);
   var cssFilter = $.filter(['**/*.css']);
   var htmlFilter = $.filter(['*.html']);
 
-  return gulp.src('app/*.html')
+  return gulp.src('app/index.html')
     .pipe($.preprocess())
     .pipe(assets)
     .pipe(assets.restore())
