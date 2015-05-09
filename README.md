@@ -6,25 +6,18 @@
 
 ## What's inside?
 
-Bundled:
-
-* gulp or grunt
+* gulp
+* grunt
 * bower
 * browserify
 * reactify
-* react
-* react-router
-* reflux
-* jquery
-* preprocessify (env conf)
-
-Optional:
-
-* modernizr
 * coffeescript
 * compass
 * jest
-* react-bootstrap
+* reactjs
+* reflux
+* react-router
+* preprocessify (for environments management)
 
 ## Usage
 

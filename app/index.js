@@ -25,12 +25,7 @@ var ReactRefluxGenerator = yeoman.generators.Base.extend({
     });
 
     this.option('jest', {
-      desc: 'Use Jest tests',
-      defaults: false
-    });
-    
-    this.option('bootstrap', {
-      desc: 'Use React Bootstrap',
+      desc: 'Use jest tests',
       defaults: false
     });
 
@@ -59,7 +54,7 @@ var ReactRefluxGenerator = yeoman.generators.Base.extend({
       'Welcome to the excellent React Reflux generator!'
     ));
 
-    this.log(chalk.magenta('Out of the box I include React, React-Router, ReFlux, jQuery.'));
+    this.log(chalk.magenta('Out of the box I include ReactJS, React-Router, ReFlux, jQuery.'));
 
     var prompts = [{
       name: 'projectName',
@@ -106,10 +101,6 @@ var ReactRefluxGenerator = yeoman.generators.Base.extend({
         name: 'Jest tests',
         value: 'includeJest',
         checked: this.options.jest || false
-      }, {
-        name: 'React Bootstrap',
-        value: 'includeBootstrap',
-        checked: this.options.bootstrap || false
       }]
     },
     {
@@ -143,7 +134,6 @@ var ReactRefluxGenerator = yeoman.generators.Base.extend({
       this.includeCoffee = hasFeature('includeCoffee');
       this.includeSass = hasFeature('includeSass');
       this.includeJest = hasFeature('includeJest');
-      this.includeBootstrap = hasFeature('includeBootstrap');
 
       this.buildTool = props.buildTool;
 
@@ -303,10 +293,9 @@ var ReactRefluxGenerator = yeoman.generators.Base.extend({
     },
 
     styleSheets: function () {
-      this.fs.copyTpl(
+      this.fs.copy(
         this.templatePath('app/styles/main.' + (this.includeSass ? 'scss' : 'css')),
-        this.destinationPath('app/styles/main.' + (this.includeSass ? 'scss' : 'css')),
-        this
+        this.destinationPath('app/styles/main.' + (this.includeSass ? 'scss' : 'css'))
       );
     },
 
