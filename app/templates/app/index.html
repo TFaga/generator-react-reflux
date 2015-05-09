@@ -9,10 +9,9 @@
     <meta name="description" content="<%= desc %>">
     <meta name="viewport" content="width=device-width">
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
-    <% if (includeBootstrap && !includeSass) { %><!-- build:css styles/bootstrap.css -->
-    <link rel="stylesheet" href="vendor/bootstrap/dist/css/bootstrap.css">
-    <!-- endbuild --><% } %>
-    <!-- build:css<% if (buildTool === 'grunt' && includeSass) { %>(.tmp)<% } %> styles/main.css -->
+
+    <!-- build:css<% if (includeSass) { %>(.tmp)<% } %> styles/main.css --><% if (includeBootstrap && !includeSass) { %>
+    <link rel="stylesheet" href="vendor/bootstrap/dist/css/bootstrap.css"><% } %>
     <link rel="stylesheet" href="styles/main.css">
     <!-- endbuild --><% if (includeModernizr) { %>
     <!-- build:js vendor/modernizr.js -->
