@@ -12,7 +12,8 @@
   },
   "contributors": [
     "Olivier Constant <olivier.constant.pro@gmail.com>",
-    "Anders E. Andersen <andersa@ellenshoej.dk>"
+    "Anders E. Andersen <andersa@ellenshoej.dk>",
+    "evgenykochetkov <evgenykochetkov@users.noreply.github.com>"
   ],
   "engines": {
     "node": ">=0.10.0"
